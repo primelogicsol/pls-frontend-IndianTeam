@@ -103,7 +103,9 @@
     "@hello-pangea/dnd": "latest",
     "@tanstack/react-query-devtools": "latest",
     "react-icons": "latest",
-    "dotenv": "latest"
+    "dotenv": "latest",
+    "react-hot-toast": "latest",
+    "axios": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",
