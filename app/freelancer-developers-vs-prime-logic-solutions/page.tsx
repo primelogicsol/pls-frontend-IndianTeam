@@ -17,7 +17,7 @@ export default function FreelancerVsPrimeLogicPage() {
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-sm text-gray-500">Last Updated: {currentDate}</p>
           <Link href="/documents/freelancer-vs-prime-logic.pdf" target="_blank" passHref>
-            <Button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700">
+            <Button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#003087] hover:bg-[#003087]">
               <FileDown className="h-5 w-5" />
               <span className="sm:inline">View Service Agreement PDF</span>
             </Button>
@@ -27,14 +27,14 @@ export default function FreelancerVsPrimeLogicPage() {
         {/* Mobile-only floating button for quick access */}
         <div className="sm:hidden fixed bottom-6 right-6 z-50">
           <Link href="/documents/freelancer-vs-prime-logic.pdf" target="_blank" passHref>
-            <Button size="icon" className="h-12 w-12 rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg">
+            <Button size="icon" className="h-12 w-12 rounded-full bg-[#003087] hover:bg-[#003087] shadow-lg">
               <FileDown className="h-6 w-6" />
             </Button>
           </Link>
         </div>
 
         <div className="prose max-w-none">
-          <h2 className="text-2xl font-bold text-blue-700 mb-4">
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">
             Freelancer Developers vs Prime Logic Solutions Service Agreement
           </h2>
 
@@ -61,7 +61,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </p>
           </div>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">1. Scope of Services</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">1. Scope of Services</h3>
           <p>Prime Logic Solutions engages the Freelancer to provide the following services:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>
@@ -82,7 +82,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">2. Project Timeline and Deliverables</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">2. Project Timeline and Deliverables</h3>
           <p>The following timelines apply to the specific project being worked on:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>
@@ -98,7 +98,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">3. Payment Terms</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">3. Payment Terms</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>Total Project Fee:</strong> [Total Fee Amount]
@@ -125,7 +125,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">4. Freelancer Responsibilities</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">4. Freelancer Responsibilities</h3>
           <p>The Freelancer will be responsible for:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Meeting project deadlines and delivering work as per the scope and quality standards.</li>
@@ -139,7 +139,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">5. Prime Logic Solutions Responsibilities</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">5. Prime Logic Solutions Responsibilities</h3>
           <p>Prime Logic Solutions will:</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>Provide the Freelancer with access to necessary tools, resources, and documentation.</li>
@@ -147,7 +147,7 @@ export default function FreelancerVsPrimeLogicPage() {
             <li>Oversee the quality assurance process and ensure that the deliverables meet client expectations.</li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">6. Intellectual Property</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">6. Intellectual Property</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>Ownership:</strong> Upon full payment, the Freelancer transfers all rights, ownership, and
@@ -160,7 +160,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">
             7. Confidentiality and Non-Disclosure Agreement (NDA)
           </h3>
           <p>
@@ -209,7 +209,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">8. Warranties and Support</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">8. Warranties and Support</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>Freelancer Warranties:</strong> The Freelancer warrants that the deliverables will meet the agreed
@@ -221,7 +221,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">9. Termination</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">9. Termination</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>By the Freelancer:</strong> The Freelancer may terminate this Agreement with written notice if
@@ -237,21 +237,21 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">10. Limitation of Liability</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">10. Limitation of Liability</h3>
           <p>
             Prime Logic Solutions will not be liable for any indirect, special, incidental, or consequential damages
             arising from the Freelancer's work. The liability of Prime Logic Solutions will be limited to the amount
             paid by the Client for the work in question.
           </p>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">11. Dispute Resolution</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">11. Dispute Resolution</h3>
           <p>
             In the event of any dispute arising out of this Agreement, the parties will first attempt to resolve the
             issue through informal negotiation. If unresolved, the dispute will be settled through binding arbitration
             according to the rules of [Arbitration Organization] in [Location].
           </p>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">12. Miscellaneous</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">12. Miscellaneous</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <strong>Amendments:</strong> This Agreement may only be amended in writing and signed by both parties.
@@ -265,7 +265,7 @@ export default function FreelancerVsPrimeLogicPage() {
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold text-blue-600 mt-8">13. Acceptance</h3>
+          <h3 className="text-xl font-semibold text-[#003087] mt-8">13. Acceptance</h3>
           <p>By signing below, both parties agree to the terms and conditions outlined in this Service Agreement.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6 mb-12">
@@ -287,36 +287,36 @@ export default function FreelancerVsPrimeLogicPage() {
         </div>
 
         <div className="bg-blue-50 p-6 rounded-lg mt-8">
-          <h3 className="text-xl font-bold text-blue-700 mb-4">Why Work With Prime Logic Solutions?</h3>
+          <h3 className="text-xl font-bold text-[#003087] mb-4">Why Work With Prime Logic Solutions?</h3>
           <ul className="space-y-3">
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">✓</span>
+              <span className="text-[#003087] mr-2">✓</span>
               <span>
                 <strong>Consistent Work:</strong> Access to a steady stream of projects without having to constantly
                 search for new clients.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">✓</span>
+              <span className="text-[#003087] mr-2">✓</span>
               <span>
                 <strong>Professional Growth:</strong> Opportunity to work on diverse projects and expand your skill set.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">✓</span>
+              <span className="text-[#003087] mr-2">✓</span>
               <span>
                 <strong>Timely Payments:</strong> Reliable payment schedule without the worry of client payment issues.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">✓</span>
+              <span className="text-[#003087] mr-2">✓</span>
               <span>
                 <strong>Support System:</strong> Access to a team of professionals for collaboration and
                 problem-solving.
               </span>
             </li>
             <li className="flex items-start">
-              <span className="text-blue-500 mr-2">✓</span>
+              <span className="text-[#003087] mr-2">✓</span>
               <span>
                 <strong>Reduced Administrative Burden:</strong> Focus on development work while we handle client
                 communication and project management.
@@ -329,7 +329,7 @@ export default function FreelancerVsPrimeLogicPage() {
           <h3 className="text-xl font-bold mb-4">Interested in joining our freelancer network?</h3>
           <p className="mb-6">Contact us today to discuss opportunities and how we can work together.</p>
           <Link href="/contact-us" passHref>
-            <Button className="bg-blue-600 hover:bg-blue-700">Contact Us Now</Button>
+            <Button className="bg-[#003087] hover:bg-[#003087]">Contact Us Now</Button>
           </Link>
         </div>
       </div>

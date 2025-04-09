@@ -210,7 +210,7 @@ export default function Appointment() {
                 <div className="flex justify-end">
                   <Button
                     type="submit"
-                    className="bg-[#FF6B35] text-white hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg"
+                    className="bg-[#FF6B35] text-white hover:bg-[#003087] hover:text-white px-6 py-3 rounded-lg"
                     disabled={isLoading}
                   >
                     {isLoading ? (

@@ -28,7 +28,7 @@ export default function StaticPageSidebar() {
 
   return (
     <div className="w-full md:w-64 bg-white shadow-md rounded-lg overflow-hidden">
-      <div className="bg-blue-600 px-4 py-3">
+      <div className="bg-[#003087] px-4 py-3">
         <h2 className="text-lg font-semibold text-white">Company Pages</h2>
       </div>
       <nav className="p-4">
@@ -39,7 +39,7 @@ export default function StaticPageSidebar() {
                 href={page.href}
                 className={cn(
                   "block px-3 py-2 rounded-md text-sm transition-colors",
-                  pathname === page.href ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-100",
+                  pathname === page.href ? "bg-blue-50 text-[#003087] font-medium" : "text-gray-700 hover:bg-gray-100",
                 )}
               >
                 {page.title}

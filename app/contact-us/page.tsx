@@ -9,7 +9,7 @@ export default function ContactUsPage() {
       <div className="space-y-10">
         {/* Hero Section */}
         <div className="text-center mb-10">
-          <h2 className="text-2xl font-bold text-blue-700 mb-4">Get in Touch with Prime Logic Solutions</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Get in Touch with Prime Logic Solutions</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             We're here to answer any questions you may have about our services. Reach out to us and we'll respond as
             soon as we can.
@@ -20,33 +20,33 @@ export default function ContactUsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
             <div className="bg-blue-100 p-3 rounded-full mb-4">
-              <Mail className="h-6 w-6 text-blue-600" />
+              <Mail className="h-6 w-6 text-[#003087]" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Email Us</h3>
             <p className="text-gray-600 mb-4">For general inquiries and support</p>
-            <a href="mailto:support@primelogicsol.com" className="text-blue-600 font-medium hover:underline">
+            <a href="mailto:support@primelogicsol.com" className="text-[#003087] font-medium hover:underline">
               support@primelogicsol.com
             </a>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
             <div className="bg-blue-100 p-3 rounded-full mb-4">
-              <Phone className="h-6 w-6 text-blue-600" />
+              <Phone className="h-6 w-6 text-[#003087]" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Call Us</h3>
             <p className="text-gray-600 mb-4">Mon-Fri from 9am to 6pm</p>
-            <a href="tel:+1234567890" className="text-blue-600 font-medium hover:underline">
+            <a href="tel:+1234567890" className="text-[#003087] font-medium hover:underline">
               +1 (234) 567-890
             </a>
           </div>
 
           <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center">
             <div className="bg-blue-100 p-3 rounded-full mb-4">
-              <MapPin className="h-6 w-6 text-blue-600" />
+              <MapPin className="h-6 w-6 text-[#003087]" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Visit Us</h3>
             <p className="text-gray-600 mb-4">Our office location</p>
-            <address className="not-italic text-blue-600">
+            <address className="not-italic text-[#003087]">
               123 Business Avenue
               <br />
               Suite 456
@@ -58,7 +58,7 @@ export default function ContactUsPage() {
 
         {/* Contact Form */}
         <div className="bg-white p-8 rounded-lg shadow-md">
-          <h3 className="text-xl font-bold text-blue-700 mb-6">Send Us a Message</h3>
+          <h3 className="text-xl font-bold text-[#003087] mb-6">Send Us a Message</h3>
           <form className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -69,7 +69,7 @@ export default function ContactUsPage() {
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#003087] focus:border-[#003087]"
                   placeholder="John Doe"
                   required
                 />
@@ -82,7 +82,7 @@ export default function ContactUsPage() {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#003087] focus:border-[#003087]"
                   placeholder="john@example.com"
                   required
                 />
@@ -96,7 +96,7 @@ export default function ContactUsPage() {
                 type="text"
                 id="subject"
                 name="subject"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#003087] focus:border-[#003087]"
                 placeholder="How can we help you?"
                 required
               />
@@ -109,13 +109,13 @@ export default function ContactUsPage() {
                 id="message"
                 name="message"
                 rows={5}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#003087] focus:border-[#003087]"
                 placeholder="Please describe your inquiry in detail..."
                 required
               ></textarea>
             </div>
             <div>
-              <Button type="submit" className="w-full md:w-auto bg-blue-600 hover:bg-blue-700">
+              <Button type="submit" className="w-full md:w-auto bg-[#003087] hover:bg-[#003087]">
                 Send Message
               </Button>
             </div>
@@ -125,8 +125,8 @@ export default function ContactUsPage() {
         {/* Office Hours */}
         <div className="bg-white p-8 rounded-lg shadow-md">
           <div className="flex items-center mb-6">
-            <Clock className="h-6 w-6 text-blue-600 mr-2" />
-            <h3 className="text-xl font-bold text-blue-700">Business Hours</h3>
+            <Clock className="h-6 w-6 text-[#003087] mr-2" />
+            <h3 className="text-xl font-bold text-[#003087]">Business Hours</h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -168,7 +168,7 @@ export default function ContactUsPage() {
 
         {/* FAQ Section */}
         <div className="bg-white p-8 rounded-lg shadow-md">
-          <h3 className="text-xl font-bold text-blue-700 mb-6">Frequently Asked Questions</h3>
+          <h3 className="text-xl font-bold text-[#003087] mb-6">Frequently Asked Questions</h3>
           <div className="space-y-6">
             <div>
               <h4 className="font-semibold text-lg mb-2">What services does Prime Logic Solutions offer?</h4>
@@ -203,7 +203,7 @@ export default function ContactUsPage() {
 
         {/* Global Offices */}
         <div className="bg-blue-50 p-8 rounded-lg">
-          <h3 className="text-xl font-bold text-blue-700 mb-6">Our Global Offices</h3>
+          <h3 className="text-xl font-bold text-[#003087] mb-6">Our Global Offices</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div>
               <h4 className="font-semibold mb-2">New York</h4>
@@ -243,11 +243,11 @@ export default function ContactUsPage() {
 
         {/* Resources */}
         <div className="bg-white p-8 rounded-lg shadow-md">
-          <h3 className="text-xl font-bold text-blue-700 mb-6">Helpful Resources</h3>
+          <h3 className="text-xl font-bold text-[#003087] mb-6">Helpful Resources</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Link href="/documents/client-service-agreement.pdf" target="_blank" passHref>
               <div className="flex items-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer">
-                <FileDown className="h-5 w-5 text-blue-600 mr-3" />
+                <FileDown className="h-5 w-5 text-[#003087] mr-3" />
                 <div>
                   <h4 className="font-medium">Client Service Agreement</h4>
                   <p className="text-sm text-gray-500">Download our standard client agreement</p>
@@ -256,7 +256,7 @@ export default function ContactUsPage() {
             </Link>
             <Link href="/documents/freelancer-vs-prime-logic.pdf" target="_blank" passHref>
               <div className="flex items-center p-4 border rounded-md hover:bg-gray-50 cursor-pointer">
-                <FileDown className="h-5 w-5 text-blue-600 mr-3" />
+                <FileDown className="h-5 w-5 text-[#003087] mr-3" />
                 <div>
                   <h4 className="font-medium">Freelancer Agreement</h4>
                   <p className="text-sm text-gray-500">Download our standard freelancer agreement</p>

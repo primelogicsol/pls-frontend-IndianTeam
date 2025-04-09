@@ -124,7 +124,7 @@ export function HeaderPreview() {
         return (
           <div className="relative">
             <button
-              className={`flex items-center font-medium ${activeDropdown === item.id ? "text-blue-300" : "text-white hover:text-gray-300"}`}
+              className={`flex items-center font-medium ${activeDropdown === item.id ? "text-[#003087]" : "text-white hover:text-gray-300"}`}
               onClick={() => toggleDropdown(item.id)}
             >
               {item.title} <ChevronDown className="ml-1 h-4 w-4" />
@@ -135,7 +135,7 @@ export function HeaderPreview() {
         return (
           <div className="relative">
             <button
-              className={`flex items-center font-medium ${activeDropdown === item.id ? "text-blue-300" : "text-white hover:text-gray-300"}`}
+              className={`flex items-center font-medium ${activeDropdown === item.id ? "text-[#003087]" : "text-white hover:text-gray-300"}`}
               onClick={() => toggleDropdown(item.id)}
             >
               {item.title} <ChevronDown className="ml-1 h-4 w-4" />
@@ -262,7 +262,7 @@ export function HeaderPreview() {
                                 <ul className="space-y-2">
                                   {categoryItems.map((subItem) => (
                                     <li key={subItem.id}>
-                                      <Link href={subItem.url || "#"} className="text-gray-700 hover:text-blue-600">
+                                      <Link href={subItem.url || "#"} className="text-gray-700 hover:text-[#003087]">
                                         {subItem.title}
                                       </Link>
                                     </li>
@@ -279,7 +279,7 @@ export function HeaderPreview() {
                                 <ul className="space-y-2">
                                   {child.subItems.map((subItem) => (
                                     <li key={subItem.id}>
-                                      <Link href={subItem.url || "#"} className="text-gray-700 hover:text-blue-600">
+                                      <Link href={subItem.url || "#"} className="text-gray-700 hover:text-[#003087]">
                                         {subItem.title}
                                       </Link>
                                     </li>

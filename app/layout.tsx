@@ -7,9 +7,9 @@ import FooterCard from "@/components/footer-card"
 import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
-  title: "Custom Admin Dashboard",
-  description: "A custom admin dashboard for managing content",
-    generator: 'v0.dev'
+  title: "Prime Logic Solutions",
+  description: "A freelance it development agency",
+    generator: 'primelogicsolutions'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -132,7 +132,7 @@ export default async function TechnologyPreviewIframe({ params, searchParams }: 
             <h2 className="text-2xl font-bold mb-4">Our Services</h2>
             <div className="space-y-4">
               {technology.services.map((service, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg border-l-4 border-blue-500">
+                <div key={index} className="bg-white p-6 rounded-lg border-l-4 border-[#003087]">
                   <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
                   <p className="text-gray-600">{service.description}</p>
                 </div>

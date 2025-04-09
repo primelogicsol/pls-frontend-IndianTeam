@@ -35,7 +35,7 @@ const EnterpriseSuite = () => {
         <div className="grid md:grid-cols-3 items-center">
           {/* Image Section */}
           <motion.div
-            className="col-span-2 relative h-full min-h-[600px] bg-blue-700"
+            className="col-span-2 relative h-full min-h-[600px] bg-[#003087]"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}

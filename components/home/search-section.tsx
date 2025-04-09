@@ -55,7 +55,7 @@ export default function SearchSection() {
         <div className="max-w-7xl mx-auto bg-[#003087] rounded-2xl overflow-hidden text-white">
           <div className="grid md:grid-cols-3 items-center relative">
             {/* Image Section */}
-            <div className="flex col-span-2 relative h-full min-h-[500px] bg-blue-700">
+            <div className="flex col-span-2 relative h-full min-h-[500px] bg-[#003087]">
               {mainImgSrc ? (
                 <Image
                   src={mainImgSrc || "/placeholder.svg"}
@@ -73,7 +73,7 @@ export default function SearchSection() {
               )}
 
               {/* Info Card */}
-              <div className="absolute mb-8 bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-blue-700 p-4 rounded-xl shadow-lg w-11/12 max-w-md text-center">
+              <div className="absolute mb-8 bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-[#003087] p-4 rounded-xl shadow-lg w-11/12 max-w-md text-center">
                 <h3 className="text-lg font-semibold">
                   Our solutions are designed to align with US industry regulations, including GDPR, HIPAA, PCI-DSS, and
                   federal cybersecurity standards.
@@ -95,7 +95,7 @@ export default function SearchSection() {
                     onError={logoImgError ? handleLogoImgFallbackError : handleLogoImgError}
                   />
                 ) : (
-                  <div className="w-[250px] h-[200px] flex items-center justify-center bg-blue-800 text-white rounded-md">
+                  <div className="w-[250px] h-[200px] flex items-center justify-center bg-[#003087] text-white rounded-md">
                     Company Logo
                   </div>
                 )}

@@ -370,7 +370,7 @@ export function HeaderManager() {
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   {...provided.dragHandleProps}
-                                  className={`border rounded-md p-4 ${item.type === "three-level-hierarchy" ? "border-blue-300 bg-blue-50" : ""}`}
+                                  className={`border rounded-md p-4 ${item.type === "three-level-hierarchy" ? "border-[#003087] bg-blue-50" : ""}`}
                                 >
                                   <div className="flex justify-between items-center">
                                     <div>

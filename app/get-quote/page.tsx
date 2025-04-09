@@ -24,7 +24,7 @@ export default function GetQuotePage() {
         data.deadline = new Date(data.deadline).toLocaleString()
       }
       startLoading()
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/getQuotes/createQuote`, data)
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}getQuotes/createQuote`, data)
       return successMessage("Your Quote has been submitted successfully Please check your email")
     } catch (error) {
       console.error("Error submitting form:", error)
@@ -49,7 +49,7 @@ export default function GetQuotePage() {
               id="name"
               type="text"
               {...register("name")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.name ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -65,7 +65,7 @@ export default function GetQuotePage() {
               id="email"
               type="email"
               {...register("email")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -81,7 +81,7 @@ export default function GetQuotePage() {
               id="phone"
               type="tel"
               {...register("phone")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.phone ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -97,7 +97,7 @@ export default function GetQuotePage() {
               id="address"
               {...register("address")}
               rows={3}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.address ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -113,7 +113,7 @@ export default function GetQuotePage() {
               id="services"
               type="text"
               {...register("services")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.services ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -129,7 +129,7 @@ export default function GetQuotePage() {
               id="company"
               type="text"
               {...register("company")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.company ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -145,7 +145,7 @@ export default function GetQuotePage() {
               id="detail"
               {...register("detail")}
               rows={4}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.detail ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -161,7 +161,7 @@ export default function GetQuotePage() {
               id="deadline"
               type="date"
               {...register("deadline")}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black ${
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.deadline ? "border-red-500" : "border-gray-300"
               }`}
             />

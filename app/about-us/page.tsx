@@ -5,7 +5,7 @@ export default function AboutUsPage() {
     <StaticPageLayout title="About Us">
       <div className="space-y-8">
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Who We Are</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Who We Are</h2>
           <p className="mb-4">
             Prime Logic Solutions is a leading technology company that specializes in providing innovative software
             solutions and IT services to businesses of all sizes. Founded in 2015, we have grown from a small team of
@@ -19,7 +19,7 @@ export default function AboutUsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Expertise</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Our Expertise</h2>
           <p className="mb-4">
             With a team of highly skilled professionals, we offer a comprehensive range of services including:
           </p>
@@ -39,7 +39,7 @@ export default function AboutUsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Approach</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Our Approach</h2>
           <p className="mb-4">
             At Prime Logic Solutions, we follow a collaborative and client-centric approach to every project. We begin
             by understanding your business objectives and challenges, then work closely with you to design and implement
@@ -53,7 +53,7 @@ export default function AboutUsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Values</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Our Values</h2>
           <ul className="list-disc pl-6 mb-4 space-y-2">
             <li>
               <span className="font-semibold">Excellence:</span> We strive for excellence in everything we do, from code
@@ -79,7 +79,7 @@ export default function AboutUsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Our Team</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Our Team</h2>
           <p className="mb-4">
             Our greatest asset is our team of talented professionals who bring diverse skills, experiences, and
             perspectives to the table. From seasoned software architects and developers to creative designers and
@@ -93,7 +93,7 @@ export default function AboutUsPage() {
         </section>
 
         <section>
-          <h2 className="text-2xl font-bold text-blue-600 mb-4">Join Us on Our Journey</h2>
+          <h2 className="text-2xl font-bold text-[#003087] mb-4">Join Us on Our Journey</h2>
           <p className="mb-4">
             We are excited about the future of technology and the opportunities it presents for businesses to innovate
             and grow. We invite you to partner with Prime Logic Solutions and experience the difference that our

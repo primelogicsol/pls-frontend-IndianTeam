@@ -42,7 +42,7 @@ export default function ServiceDetails({ service }: ServiceDetailsProps) {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-[300px] bg-gradient-to-r from-blue-900 to-blue-800">
+      <div className="relative h-[300px] bg-gradient-to-r from-[#003087] to-[#003087]">
         <div className="absolute inset-0 bg-[#003087]" />
         <div className="relative container mx-auto px-4 h-full flex flex-col justify-center items-center text-white">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">{safeService.title}</h1>
@@ -144,7 +144,7 @@ export default function ServiceDetails({ service }: ServiceDetailsProps) {
                       >
                         <DynamicIcon
                           iconName={serviceCard.iconName}
-                          className="w-10 h-10 text-blue-600 mb-4 group-hover:text-white transition-colors"
+                          className="w-10 h-10 text-[#003087] mb-4 group-hover:text-white transition-colors"
                         />
                         <h4 className="text-lg font-semibold mb-2 group-hover:text-white transition-colors">
                           {serviceCard.title}
@@ -173,7 +173,7 @@ export default function ServiceDetails({ service }: ServiceDetailsProps) {
                       >
                         <DynamicIcon
                           iconName={advantage.iconName}
-                          className="w-10 h-10 text-blue-600 mb-4 group-hover:text-white transition-colors"
+                          className="w-10 h-10 text-[#003087] mb-4 group-hover:text-white transition-colors"
                         />
                         <div>
                           <h4 className="font-semibold mb-1 group-hover:text-white transition-colors">
@@ -227,7 +227,7 @@ export default function ServiceDetails({ service }: ServiceDetailsProps) {
                       >
                         <DynamicIcon
                           iconName={standard.iconName}
-                          className="w-10 h-10 text-blue-600 mb-4 group-hover:text-white transition-colors"
+                          className="w-10 h-10 text-[#003087] mb-4 group-hover:text-white transition-colors"
                         />
                         <h4 className="text-lg font-semibold mb-2 group-hover:text-white transition-colors">
                           {standard.title}
@@ -305,7 +305,7 @@ export default function ServiceDetails({ service }: ServiceDetailsProps) {
                 </div>
               )}
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-white text-blue-900 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                <Button className="bg-white text-[#003087] px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition flex items-center justify-center gap-2">
                   <Rocket className="w-5 h-5" /> Get Started Now
                 </Button>
                 <Button

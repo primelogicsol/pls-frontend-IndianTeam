@@ -19,7 +19,7 @@ export default function StaticPageLayout({ title, children }: StaticPageLayoutPr
           {/* Mobile Sidebar Toggle */}
           <div className="md:hidden mb-4">
             <details className="group">
-              <summary className="flex cursor-pointer items-center justify-between rounded-lg bg-blue-600 px-4 py-2 text-white">
+              <summary className="flex cursor-pointer items-center justify-between rounded-lg bg-[#003087] px-4 py-2 text-white">
                 <span className="text-sm font-medium">Company Pages</span>
                 <span className="shrink-0 transition duration-300 group-open:-rotate-180">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -40,7 +40,7 @@ export default function StaticPageLayout({ title, children }: StaticPageLayoutPr
           {/* Main Content */}
           <div className="flex-1">
             <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <div className="bg-blue-600 px-6 py-4">
+              <div className="bg-[#003087] px-6 py-4">
                 <h1 className="text-2xl font-bold text-white">{title}</h1>
               </div>
               <div className="px-6 py-8">{children}</div>

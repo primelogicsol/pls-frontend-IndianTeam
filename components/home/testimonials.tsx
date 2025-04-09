@@ -141,7 +141,7 @@ export default function Testimonials() {
 
   return (
     <section className="mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white">
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-blue-900 text-center mb-10">
+      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#003087] text-center mb-10">
         Trusted by leading brands and startups
       </h2>
 
