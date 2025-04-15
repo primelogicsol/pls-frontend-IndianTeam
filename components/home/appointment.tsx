@@ -3,15 +3,16 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Phone, Mail, MapPin, Loader2, Check } from "lucide-react"
+import { Phone, Mail, MapPin, Loader2 } from "lucide-react"
 import { motion } from "framer-motion"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { Input } from "../ui/input"
+import { Textarea } from "../ui/textarea"
+import { Button } from "../ui/button"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { consultationSchema, type ConsultationFormData } from "@/validation/consultationschema"
-import { submitConsultation } from "@/app/actions/consultation-actions"
+import axios from "axios"
+import { toast } from "sonner"
+import { consultationSchema, type ConsultationFormData } from "../../validation/consultationschema"
 
 // Contact Card Component
 const ContactCard = ({ icon, title, detail }: { icon: React.ReactNode; title: string; detail: string }) => (
@@ -26,8 +27,6 @@ const ContactCard = ({ icon, title, detail }: { icon: React.ReactNode; title: st
 
 export default function Appointment() {
   const [isLoading, setIsLoading] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [responseMessage, setResponseMessage] = useState("")
 
   const {
     register,
@@ -39,26 +38,31 @@ export default function Appointment() {
   })
 
   const onSubmit = async (data: ConsultationFormData) => {
-    setIsLoading(true)
-
     try {
-      const response = await submitConsultation(data)
-
-      if (response.success) {
-        setIsSubmitted(true)
-        setResponseMessage(response.message)
-        reset()
-
-        // Reset success message after 8 seconds
-        setTimeout(() => {
-          setIsSubmitted(false)
-        }, 8000)
-      } else {
-        setResponseMessage(response.message)
+      // Convert date to locale string before submission
+      if (data.date) {
+        const formattedDate = new Date(data.date).toLocaleString()
+        data = { ...data, date: formattedDate }
       }
+
+      setIsLoading(true)
+      const { name, email, phone, address, date, subject, message } = data
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/consultation/requestAConsultation`, {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address,
+        bookingDate: date,
+        subject: subject,
+        message: message,
+      })
+      toast.success(
+        "Your consultation request has been submitted successfully. Please check your email for confirmation.",
+      )
+      reset() // Reset form after successful submission
     } catch (error) {
       console.error("Error submitting consultation request:", error)
-      setResponseMessage("An unexpected error occurred. Please try again.")
+      toast.error("Something went wrong while submitting your consultation request. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -123,111 +127,70 @@ export default function Appointment() {
             className="bg-[#003087] p-8 rounded-lg w-full"
           >
             <h3 className="text-2xl font-bold text-white mb-6">Book Your Consultation</h3>
-
-            {isSubmitted ? (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
-                <div className="flex justify-center mb-4">
-                  <div className="bg-green-100 rounded-full p-2">
-                    <Check className="h-6 w-6 text-green-600" />
-                  </div>
-                </div>
-                <h3 className="text-lg font-semibold text-green-800 mb-2">Consultation Request Submitted!</h3>
-                <p className="text-green-700">{responseMessage}</p>
+            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              <div>
+                <label className="block text-white mb-2">Full Name</label>
+                <Input {...register("name")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               </div>
-            ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div>
-                  <label className="block text-white mb-2">Full Name</label>
-                  <Input
-                    {...register("name")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.name ? "true" : "false"}
-                  />
-                  {errors.name && <p className="text-red-300 text-sm mt-1">{errors.name.message}</p>}
-                </div>
 
-                <div>
-                  <label className="block text-white mb-2">Email Address</label>
-                  <Input
-                    type="email"
-                    {...register("email")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.email ? "true" : "false"}
-                  />
-                  {errors.email && <p className="text-red-300 text-sm mt-1">{errors.email.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Email Address</label>
+                <Input type="email" {...register("email")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
+              </div>
 
-                <div>
-                  <label className="block text-white mb-2">Phone Number</label>
-                  <Input
-                    type="tel"
-                    {...register("phone")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.phone ? "true" : "false"}
-                  />
-                  {errors.phone && <p className="text-red-300 text-sm mt-1">{errors.phone.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Phone Number</label>
+                <Input type="tel" {...register("phone")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
+              </div>
 
-                <div>
-                  <label className="block text-white mb-2">Address</label>
-                  <Input {...register("address")} className="w-full px-4 py-2 rounded-lg" />
-                  {errors.address && <p className="text-red-300 text-sm mt-1">{errors.address.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Address</label>
+                <Input {...register("address")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
+              </div>
 
-                <div>
-                  <label className="block text-white mb-2">Consultation Date</label>
-                  <Input
-                    type="datetime-local"
-                    {...register("date")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.date ? "true" : "false"}
-                  />
-                  {errors.date && <p className="text-red-300 text-sm mt-1">{errors.date.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Consultation Date</label>
+                <Input type="datetime-local" {...register("date")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.date && <p className="text-red-500 text-sm mt-1">{errors.date.message}</p>}
+              </div>
 
-                <div>
-                  <label className="block text-white mb-2">Consultation Subject</label>
-                  <Input
-                    {...register("subject")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.subject ? "true" : "false"}
-                  />
-                  {errors.subject && <p className="text-red-300 text-sm mt-1">{errors.subject.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Consultation Subject</label>
+                <Input {...register("subject")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.subject && <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>}
+              </div>
 
-                <div>
-                  <label className="block text-white mb-2">Message</label>
-                  <Textarea
-                    {...register("message")}
-                    className="w-full px-4 py-2 rounded-lg"
-                    aria-invalid={errors.message ? "true" : "false"}
-                  />
-                  {errors.message && <p className="text-red-300 text-sm mt-1">{errors.message.message}</p>}
-                </div>
+              <div>
+                <label className="block text-white mb-2">Message</label>
+                <Textarea {...register("message")} className="w-full px-4 py-2 rounded-lg" />
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>}
+              </div>
 
-                {responseMessage && !isSubmitted && <div className="text-red-300 text-sm">{responseMessage}</div>}
-
-                <div className="flex justify-end">
-                  <Button
-                    type="submit"
-                    className="bg-[#FF6B35] text-white hover:bg-[#003087] hover:text-white px-6 py-3 rounded-lg"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        <span>Processing...</span>
-                      </>
-                    ) : (
-                      <strong>Submit Consultation Request</strong>
-                    )}
-                  </Button>
-                </div>
-              </form>
-            )}
+              <div className="flex justify-end">
+                <Button
+                  type="submit"
+                  className="bg-[#FF6B35] text-white hover:bg-blue-600 hover:text-white px-6 py-3 rounded-lg"
+                  disabled={isLoading}
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <span>Processing...</span>
+                    </>
+                  ) : (
+                    <strong>Submit Consultation Request</strong>
+                  )}
+                </Button>
+              </div>
+            </form>
           </motion.div>
         </div>
       </div>
     </section>
   )
 }
+
