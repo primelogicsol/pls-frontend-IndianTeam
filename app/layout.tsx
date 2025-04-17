@@ -22,7 +22,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <div className="flex-1">{children}</div>
+            <ToastProvider>
+                        <div className="flex-1">{children}</div>
+            </ToastProvider>
             <FooterCard />
             <Footer />
           </div>
@@ -34,3 +36,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 
 import './globals.css'
+import { ToastProvider } from "@/components/ui/toast"

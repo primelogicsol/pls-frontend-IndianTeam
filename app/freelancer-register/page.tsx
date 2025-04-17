@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
 
+// Define the schema for validation
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -26,6 +27,29 @@ const formSchema = z.object({
   country: z.string().min(2, { message: "Please enter your country." }),
   yearOfExperience: z.string().min(1, { message: "Please enter your years of experience." }),
 })
+
+// Server action to handle form submission
+async function submitFreelancerRegistration(formData: z.infer<typeof formSchema>) {
+  try {
+    const response = await fetch("/api/freelancer/getFreeLancerJoinUsRequest", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || "Failed to submit registration")
+    }
+
+    return { success: true }
+  } catch (error) {
+    console.error("Registration error:", error)
+    return { success: false, error: error instanceof Error ? error.message : "Unknown error occurred" }
+  }
+}
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -52,26 +76,17 @@ export default function RegisterPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     try {
-      // Use fetch to call our own API endpoint
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/freelancer/getFreeLancerJoinUsRequest`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
+      const result = await submitFreelancerRegistration(values)
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Something went wrong")
+      if (!result.success) {
+        throw new Error(result.error || "Something went wrong")
       }
 
       toast({
         title: "Registration successful!",
         description: "Your application has been submitted.",
       })
-      router.push("/register/success")
+      // Removed the redirect line
     } catch (error) {
       console.error("Submission error:", error)
       toast({
