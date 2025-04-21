@@ -58,7 +58,7 @@ const ServiceCard = ({ service }: { service: ITCard }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
   // Get the icon component from the icon name
-  const IconComponent = iconMap[service.icon] || Code
+  const IconComponent = (iconMap[service.icon] || Code) as React.ComponentType<{ className?: string }>
 
   return (
     <motion.div
@@ -109,14 +109,6 @@ const ServiceCard = ({ service }: { service: ITCard }) => {
               </li>
             ))}
           </ul>
-
-          <Link
-            href={`/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-            className="inline-flex items-center text-white hover:text-[#FF6B35] group/link"
-          >
-            READ DETAILS
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-          </Link>
         </div>
       </motion.div>
     </motion.div>
@@ -144,7 +136,7 @@ export function IndustryCard({ itCards = [] }: IndustryCardProps) {
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null
 
-    if (isPlaying && sortedITCards.length > 0) {
+    const startInterval = () => {
       intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => {
           const nextIndex = prevIndex + 1
@@ -154,6 +146,10 @@ export function IndustryCard({ itCards = [] }: IndustryCardProps) {
           return nextIndex
         })
       }, 3000)
+    }
+
+    if (isPlaying && sortedITCards.length > 0) {
+      startInterval()
     }
 
     return () => {

@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { Plus, Check, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { techSelection, whyChooseUs } from "@/components/data/techdata"
 import ContactForm from "@/app/components/layout/contactform"
+// Import the ImageWithFallback component
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 interface TechnologyData {
   id: string
@@ -57,6 +58,7 @@ export default function TechnologyDetails({ data, type, parentTitle }: Props) {
   const [isSticky, setIsSticky] = useState(false)
   const [activeSection, setActiveSection] = useState("overview")
   const [techStackData, setTechStackData] = useState<any>(null)
+  const [imageError, setImageError] = useState(false)
 
   useEffect(() => {
     // Process and normalize tech stack data
@@ -129,18 +131,25 @@ export default function TechnologyDetails({ data, type, parentTitle }: Props) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const handleImageError = () => {
+    console.error("Failed to load hero image")
+    setImageError(true)
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-[#f5f5f5]">
       {/* Hero Section */}
       <section className="relative bg-gray-800 py-24">
         <div className="absolute inset-0 overflow-hidden">
-          <Image
-            src="/placeholder.svg?height=400&width=1920"
+          <ImageWithFallback
+            src="/interconnected-network.png"
             alt="Hero Background"
             fill
             className="object-cover opacity-40"
+            sizes="100vw"
+            priority
           />
-          <div className="absolute inset-0 bg-[#003087] text-white"></div>
+          <div className="absolute inset-0 bg-[#003087] text-white opacity-80"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center text-white">
@@ -218,13 +227,14 @@ export default function TechnologyDetails({ data, type, parentTitle }: Props) {
               {/* Overview Section */}
               <section id="overview" className="mb-8">
                 <Card className="p-8">
-                  <div className="mb-6 rounded-lg overflow-hidden">
-                    <Image
+                  <div className="mb-6 rounded-lg overflow-hidden relative h-[300px]">
+                    <ImageWithFallback
                       src="/assets/17.png"
                       alt={`${data.title} Overview`}
-                      width={800}
-                      height={300}
-                      className="w-full h-auto object-cover"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
+                      fallbackSrc="/interconnected-future.png"
                     />
                   </div>
                   <h2 className="text-2xl font-bold mb-4">{data.subtitle}</h2>

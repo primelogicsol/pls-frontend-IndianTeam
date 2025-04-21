@@ -11,6 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/hooks/use-toast"
+import axios from "axios"
 
 // Define the schema for validation
 const formSchema = z.object({
@@ -31,18 +32,12 @@ const formSchema = z.object({
 // Server action to handle form submission
 async function submitFreelancerRegistration(formData: z.infer<typeof formSchema>) {
   try {
-    const response = await fetch("/api/freelancer/getFreeLancerJoinUsRequest", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    const response = await axios.post("https://api.primelogicsol.com/api/v1/freelancer/getFreeLancerJoinUsRequest", formData);
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(errorData.error || "Failed to submit registration")
-    }
+    // if (!response.ok) {
+    //   const errorData = await response.json()
+    //   throw new Error(errorData.error || "Failed to submit registration")
+    // }
 
     return { success: true }
   } catch (error) {

@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
-import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -23,6 +22,7 @@ import {
   Sparkles,
 } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 export interface DigitalService {
   id?: string
@@ -71,7 +71,13 @@ const defaultServices: DigitalService[] = [
 
 const ServiceCard = ({ service }: { service: DigitalService }) => {
   const [isFlipped, setIsFlipped] = useState(false)
+  const [imageError, setImageError] = useState(false)
   const IconComponent = iconMap[service.icon] || BarChart3
+
+  const handleImageError = () => {
+    console.error("Failed to load service image:", service.image)
+    setImageError(true)
+  }
 
   return (
     <motion.div
@@ -91,11 +97,13 @@ const ServiceCard = ({ service }: { service: DigitalService }) => {
       >
         {/* Front of the card */}
         <div className="absolute inset-0">
-          <Image
-            src={service.image || "/placeholder.svg?height=400&width=300"}
+          <ImageWithFallback
+            src={service.image || "/placeholder.svg?height=400&width=300&query=digital marketing"}
             alt={service.title}
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+            fallbackSrc="/placeholder.svg?height=400&width=300&query=digital marketing"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -120,14 +128,6 @@ const ServiceCard = ({ service }: { service: DigitalService }) => {
           <h3 className="text-3xl font-bold mb-4 text-white">{service.title}</h3>
 
           <p className="text-white/90 mb-4 text-center">{service.description}</p>
-
-          <Link
-            href={service.link || `/services/${service.title.toLowerCase().replace(/\s+/g, "-")}`}
-            className="inline-flex items-center text-white hover:text-[#FF6B35] group/link"
-          >
-            READ DETAILS
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-          </Link>
         </div>
       </motion.div>
     </motion.div>

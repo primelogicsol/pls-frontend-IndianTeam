@@ -1,7 +1,7 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 interface BlogPostCardProps {
   post: {
@@ -20,7 +20,13 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
   return (
     <Card className="overflow-hidden flex flex-col h-full">
       <div className="relative h-48 w-full">
-        <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
+        <ImageWithFallback
+          src={post.image || "/placeholder.svg?height=200&width=400&query=blog post"}
+          alt={post.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
       </div>
       <CardHeader>
         <div className="flex justify-between items-center mb-2">

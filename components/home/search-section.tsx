@@ -1,8 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { useState, useEffect } from "react"
+// Import the ImageWithFallback component
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 export default function SearchSection() {
   const [mainImgSrc, setMainImgSrc] = useState("")
@@ -36,12 +37,12 @@ export default function SearchSection() {
   // Second fallback handler for direct paths
   const handleMainImgFallbackError = () => {
     console.log("Main image fallback also failed")
-    setMainImgSrc("") // Clear the src to prevent further attempts
+    setMainImgSrc("/modern-enterprise-hub.png") // Use placeholder as final fallback
   }
 
   const handleLogoImgFallbackError = () => {
     console.log("Logo image fallback also failed")
-    setLogoImgSrc("") // Clear the src to prevent further attempts
+    setLogoImgSrc("/abstract-geometric-logo.png") // Use placeholder as final fallback
   }
 
   return (
@@ -57,15 +58,17 @@ export default function SearchSection() {
             {/* Image Section */}
             <div className="flex col-span-2 relative h-full min-h-[500px] bg-[#003087]">
               {mainImgSrc ? (
-                <Image
-                  src={mainImgSrc || "/placeholder.svg"}
-                  alt="Enterprise"
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 66vw"
-                  onError={mainImgError ? handleMainImgFallbackError : handleMainImgError}
-                />
+                <div className="relative w-full h-full">
+                  <ImageWithFallback
+                    src={mainImgSrc || "/placeholder.svg?height=500&width=800&query=enterprise"}
+                    alt="Enterprise"
+                    fill
+                    className="object-cover"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 66vw"
+                    fallbackSrc="/modern-enterprise-hub.png"
+                  />
+                </div>
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center text-white text-xl font-semibold">
                   Enterprise Image
@@ -85,15 +88,17 @@ export default function SearchSection() {
             <div className="p-12">
               <div className="flex flex-col items-center text-center">
                 {logoImgSrc ? (
-                  <Image
-                    src={logoImgSrc || "/placeholder.svg"}
-                    alt="Enterprise Logo"
-                    width={250}
-                    height={200}
-                    className="w-[150px] sm:w-[200px] md:w-[250px] h-auto"
-                    priority
-                    onError={logoImgError ? handleLogoImgFallbackError : handleLogoImgError}
-                  />
+                  <div className="relative w-[150px] sm:w-[200px] md:w-[250px] h-[100px] sm:h-[150px] md:h-[200px]">
+                    <ImageWithFallback
+                      src={logoImgSrc || "/placeholder.svg?height=200&width=250&query=enterprise logo"}
+                      alt="Enterprise Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                      sizes="(max-width: 768px) 150px, (max-width: 1200px) 200px, 250px"
+                      fallbackSrc="/abstract-geometric-logo.png"
+                    />
+                  </div>
                 ) : (
                   <div className="w-[250px] h-[200px] flex items-center justify-center bg-[#003087] text-white rounded-md">
                     Company Logo

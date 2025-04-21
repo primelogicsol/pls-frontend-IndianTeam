@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-// Import Link from next/link
 import Link from "next/link"
+
+// Import the ImageWithFallback component
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 // Update the Slide interface to include buttonLink
 interface Slide {
@@ -24,6 +26,7 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
   const [index, setIndex] = useState(0)
   const [prevIndex, setPrevIndex] = useState(0)
   const [sortedSlides, setSortedSlides] = useState<Slide[]>([])
+  const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({})
 
   // Process slides when they change
   useEffect(() => {
@@ -120,6 +123,15 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
   const safeIndex = Math.min(index, sortedSlides.length - 1)
   const safePrevIndex = Math.min(prevIndex, sortedSlides.length - 1)
 
+  // Handle image error
+  const handleImageError = (slideIndex: number) => {
+    console.error(`Failed to load image for slide ${slideIndex}:`, sortedSlides[slideIndex].image)
+    setImageLoadError((prev) => ({
+      ...prev,
+      [slideIndex]: true,
+    }))
+  }
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* Image transitions */}
@@ -132,9 +144,25 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={transitionSettings}
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${sortedSlides[safeIndex].image})` }}
-          />
+            className="absolute inset-0"
+          >
+            {imageLoadError[safeIndex] ? (
+              <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+                <span className="text-white text-lg">Image not available</span>
+              </div>
+            ) : (
+              <ImageWithFallback
+                src={sortedSlides[safeIndex].image || "/placeholder.svg?height=1080&width=1920&query=hero slide"}
+                alt={`Slide ${safeIndex + 1}: ${sortedSlides[safeIndex].heading}`}
+                fill
+                priority={safeIndex === 0} // Priority loading for first slide
+                quality={85}
+                sizes="100vw"
+                className="object-cover"
+                onError={() => handleImageError(safeIndex)}
+              />
+            )}
+          </motion.div>
         </AnimatePresence>
 
         {/* Previous image (helps with smooth crossfade) */}
@@ -143,9 +171,24 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={transitionSettings}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${sortedSlides[safePrevIndex].image})` }}
-        />
+          className="absolute inset-0"
+        >
+          {imageLoadError[safePrevIndex] ? (
+            <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+              <span className="text-white text-lg">Image not available</span>
+            </div>
+          ) : (
+            <ImageWithFallback
+              src={sortedSlides[safePrevIndex].image || "/placeholder.svg?height=1080&width=1920&query=hero slide"}
+              alt={`Slide ${safePrevIndex + 1}: ${sortedSlides[safePrevIndex].heading}`}
+              fill
+              quality={85}
+              sizes="100vw"
+              className="object-cover"
+              onError={() => handleImageError(safePrevIndex)}
+            />
+          )}
+        </motion.div>
       </div>
 
       {/* Overlay */}

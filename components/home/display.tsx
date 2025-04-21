@@ -6,12 +6,12 @@ import { ArrowRight, CheckCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const features = [
-  "AI & Automation",
-  "Enterprise Security",
-  "Cloud Mastery",
-  "Data-Driven Growth",
-  "Omnichannel Optimization",
-  "Regulatory Compliance",
+  { text: "AI & Automation" },
+  { text: "Enterprise Security" },
+  { text: "Cloud Mastery" },
+  { text: "Data-Driven Growth" },
+  { text: "Omnichannel Optimization" },
+  { text: "Regulatory Compliance" },
 ]
 
 export default function Display() {
@@ -53,12 +53,12 @@ export default function Display() {
                   className="flex items-center gap-2"
                 >
                   <CheckCircle className="text-[#FF6B35] ml-24 h-5 w-5 flex-shrink-0" />
-                  <span>{feature}</span>
+                  <span>{feature.text}</span>
                 </motion.div>
               ))}
             </div>
 
-            <Button className="group text-[#FF6B35] ml-20 hover:text-[#003087] text-xl">
+            <Button className="group text-[#FF6B35] hover:text-[#003087] text-xl">
               <strong>LEARN MORE</strong>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
@@ -72,7 +72,13 @@ export default function Display() {
               transition={{ duration: 0.5 }}
               className="absolute top-0 right-0 w-4/5 h-[400px]"
             >
-              <Image src="/assets/13.png" alt="Team collaboration" fill className="object-cover rounded-lg shadow-xl" />
+              <Image
+                src="/assets/13.png"
+                alt="Team collaboration"
+                fill
+                className="object-cover rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 40vw"
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -80,7 +86,13 @@ export default function Display() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="absolute bottom-0 left-0 w-3/5 h-[300px]"
             >
-              <Image src="/assets/12.png" alt="Business meeting" fill className="object-cover rounded-lg shadow-xl" />
+              <Image
+                src="/assets/12.png"
+                alt="Business meeting"
+                fill
+                className="object-cover rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 30vw"
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -93,6 +105,7 @@ export default function Display() {
                 alt="Professional working"
                 fill
                 className="object-cover rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 20vw"
               />
             </motion.div>
           </div>

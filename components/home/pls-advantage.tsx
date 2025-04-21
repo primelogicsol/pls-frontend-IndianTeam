@@ -64,12 +64,7 @@ export default function PLSAdvantage({ data }: PLSAdvantageProps) {
               ))}
             </div>
 
-            <Button asChild className="group text-[#FF6B35] hover:text-[#003087] text-xl">
-              <Link href={data.buttonLink || "/services"}>
-                <strong>{data.buttonText}</strong>
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            
           </motion.div>
 
           {/* Right Column - Images */}

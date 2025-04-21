@@ -1,25 +1,28 @@
-import { type ClassValue, clsx } from "clsx"
+import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+// Function to format a date to a readable string
 export function formatDate(date: Date | string): string {
-  if (!date) return "N/A"
-
   const d = typeof date === "string" ? new Date(date) : date
 
-  // Check if date is valid
-  if (isNaN(d.getTime())) return "Invalid date"
+  // Check if the date is valid
+  if (isNaN(d.getTime())) {
+    return "Invalid date"
+  }
 
+  // Format the date as: Month Day, Year
   return d.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
+    month: "long",
     day: "numeric",
+    year: "numeric",
   })
 }
 
+// Function to convert a string to a URL-friendly slug
 export function slugify(text: string): string {
   return text
     .toString()

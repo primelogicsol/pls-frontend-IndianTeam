@@ -38,7 +38,10 @@ export async function connectToDatabase() {
       connectTimeoutMS: 10000, // Add connection timeout
     }
 
-    console.log("Connecting to MongoDB with URI:", (MONGODB_URI as string).replace(/([^:]+):\/\/([^:]+):([^@]+)@/, "$1://$2:****@")) // Log URI with password hidden
+    console.log(
+      "Connecting to MongoDB with URI:",
+      (MONGODB_URI as string).replace(/([^:]+):\/\/([^:]+):([^@]+)@/, "$1://$2:****@"),
+    ) // Log URI with password hidden
 
     cached.promise = mongoose
       .connect(MONGODB_URI!, opts)
