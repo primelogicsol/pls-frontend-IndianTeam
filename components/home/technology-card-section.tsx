@@ -41,7 +41,7 @@ interface TechnologyCardSectionProps {
 }
 
 // Map of icon names to Lucide icon components
-const iconMap: Record<string, React.ComponentType> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Brain,
   Cloud,
   Link: LinkIcon,
@@ -113,14 +113,6 @@ const TechnologyCardItem = ({ card }: { card: TechnologyCard }) => {
               </li>
             ))}
           </ul>
-
-          <Link
-            href={`/technologies/${card.title.toLowerCase().replace(/\s+/g, "-")}`}
-            className="inline-flex items-center text-white hover:text-[#FF6B35] group/link"
-          >
-            READ DETAILS
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-          </Link>
         </div>
       </motion.div>
     </motion.div>
