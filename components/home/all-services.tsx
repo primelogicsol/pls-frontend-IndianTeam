@@ -83,13 +83,7 @@ const ServiceCard = ({ service }: { service: Service }) => {
             ))}
           </ul>
 
-          <Link
-            href={getServiceLink(service.title)}
-            className="inline-flex items-center text-white hover:text-[#FF6B35] group/link"
-          >
-            READ DETAILS
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/link:translate-x-1" />
-          </Link>
+          
         </div>
       </motion.div>
     </motion.div>

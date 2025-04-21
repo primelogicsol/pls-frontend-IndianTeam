@@ -67,7 +67,6 @@ export const Footer = () => {
                 alt="Prime Logic Solutions Logo"
                 width={150}
                 height={50}
-                onError={handleLogoError}
                 priority
               />
             ) : (
@@ -117,9 +116,6 @@ export const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-white hover:text-[#FF6B35]">
-                    <span className="text-[#FF6B35]">View More</span>
-                  </Link>
                 </li>
               </ul>
             </div>
@@ -152,11 +148,6 @@ export const Footer = () => {
                     Clous & DevOps
                   </Link>
                 </li>
-                <li>
-                  <Link href="#" className="text-white hover:text-[#FF6B35]">
-                    <span className="text-[#FF6B35]">View More</span>
-                  </Link>
-                </li>
               </ul>
             </div>
 
@@ -177,11 +168,6 @@ export const Footer = () => {
                 <li>
                   <Link href="/technologies/web-tech/react" className="text-white hover:text-[#FF6B35]">
                     Node.Js
-                  </Link>
-                </li>
-                <li>
-                  <Link href="#" className="text-white hover:text-[#FF6B35]">
-                    <span className="text-[#FF6B35]">View More</span>
                   </Link>
                 </li>
               </ul>
