@@ -144,7 +144,7 @@ export function IndustryCard({ itCards = [] }: IndustryCardProps) {
   useEffect(() => {
     let intervalId: NodeJS.Timeout | null = null
 
-    if (isPlaying && sortedITCards.length > 0) {
+    const startInterval = () => {
       intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => {
           const nextIndex = prevIndex + 1
@@ -154,6 +154,10 @@ export function IndustryCard({ itCards = [] }: IndustryCardProps) {
           return nextIndex
         })
       }, 3000)
+    }
+
+    if (isPlaying && sortedITCards.length > 0) {
+      startInterval()
     }
 
     return () => {

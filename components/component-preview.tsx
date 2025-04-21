@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 interface ComponentPreviewProps {
   type: string
@@ -62,7 +62,13 @@ function renderPreview(type: string, data: Record<string, any>) {
         >
           {data.image && (
             <div className="absolute inset-0 z-0">
-              <Image src={data.image || "/placeholder.svg"} alt="Hero background" fill className="object-cover" />
+              <ImageWithFallback
+                src={data.image || "/placeholder.svg?height=400&width=800&query=hero background"}
+                alt="Hero background"
+                fill
+                className="object-cover"
+                sizes="100vw"
+              />
               <div className="absolute inset-0 bg-black/40" />
             </div>
           )}
@@ -112,9 +118,9 @@ function renderPreview(type: string, data: Record<string, any>) {
               <Card key={index}>
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
-                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                      <Image
-                        src={testimonial.image || "/placeholder.svg?height=100&width=100"}
+                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4 relative">
+                      <ImageWithFallback
+                        src={testimonial.image || "/placeholder.svg?height=100&width=100&query=person"}
                         alt={testimonial.name}
                         width={48}
                         height={48}

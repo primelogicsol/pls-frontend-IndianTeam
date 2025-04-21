@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import Link from "next/link"
 import { ChevronUp, Phone, Mail, MapPin, Clock, ChevronRight, ArrowRight } from "lucide-react"
 import IndustrySection from "../[slug]/industrysection"
@@ -9,6 +8,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import ContactForm from "@/app/components/layout/contactform"
+// Import the ImageWithFallback component
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 interface ServiceData {
   id: string
@@ -241,13 +242,13 @@ export default function IndustryDesign({ data, type, parentTitle }: Props) {
                 </div>
               </div>
 
-              <div className="mt-8">
-                <Image
-                  src="/placeholder.svg?height=400&width=300"
+              <div className="mt-8 relative w-full h-[400px]">
+                <ImageWithFallback
+                  src="/diverse-healthcare-team-brochure.png"
                   alt="Healthcare Brochure"
-                  width={300}
-                  height={400}
-                  className="w-full rounded-lg"
+                  fill
+                  className="rounded-lg object-cover"
+                  sizes="(max-width: 768px) 100vw, 300px"
                 />
               </div>
             </div>
@@ -263,19 +264,17 @@ export default function IndustryDesign({ data, type, parentTitle }: Props) {
                     isVisible["section-1"] ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                   }`}
                 >
-                  {/* Use regular img tag for better error handling */}
-                  {!imageError ? (
-                    <img
+                  {/* Use Next.js Image component with proper error handling */}
+                  <div className="relative w-full h-[500px] rounded-lg overflow-hidden mb-8 transition-transform duration-300 hover:scale-[1.02]">
+                    <ImageWithFallback
                       src={industryData.image || "/placeholder.svg"}
                       alt={industryData.title}
-                      className="w-full h-auto rounded-lg mb-8 transition-transform duration-300 hover:scale-[1.02]"
-                      onError={handleImageError}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 800px"
+                      fallbackSrc="/diverse-manufacturing-floor.png"
                     />
-                  ) : (
-                    <div className="w-full h-[500px] bg-gray-200 rounded-lg mb-8 flex items-center justify-center">
-                      <p className="text-gray-500">Image could not be loaded</p>
-                    </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Introduction */}
@@ -359,15 +358,14 @@ export default function IndustryDesign({ data, type, parentTitle }: Props) {
                             {feature.description}
                           </p>
                           {feature.image && (
-                            <div className="mt-4 overflow-hidden rounded-md">
-                              <img
+                            <div className="mt-4 overflow-hidden rounded-md relative h-[200px]">
+                              <ImageWithFallback
                                 src={feature.image || "/placeholder.svg"}
                                 alt={feature.title}
-                                className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
-                                onError={(e) => {
-                                  console.error("Failed to load feature image:", feature.image)
-                                  e.currentTarget.src = "/placeholder.svg?height=200&width=300"
-                                }}
+                                fill
+                                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 300px"
+                                fallbackSrc="/abstract-geometric-shapes.png"
                               />
                             </div>
                           )}

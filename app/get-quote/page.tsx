@@ -30,7 +30,7 @@ export default function GetQuotePage() {
         title: "Quote Submitted",
         description: "Your quote has been submitted successfully.",
         duration: 5000,
-      }) 
+      })
     } catch (error) {
       console.error("Error submitting form:", error)
 

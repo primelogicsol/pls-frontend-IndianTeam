@@ -78,7 +78,13 @@ const IndustryCardItem = ({ card }: { card: IndustryCard }) => {
       >
         {/* Front of the card */}
         <div className="absolute inset-0">
-          <Image src={card.image || "/placeholder.svg"} alt={card.title} fill className="object-cover" />
+          <Image
+            src={card.image || "/placeholder.svg"}
+            alt={card.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
           <div className="absolute inset-0 bg-black/40" />
         </div>
 

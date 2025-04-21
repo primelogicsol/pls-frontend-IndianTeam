@@ -2,22 +2,37 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 const EnterpriseSuite = () => {
-  const [imgSrc, setImgSrc] = useState("")
-  const [imgError, setImgError] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
-  useEffect(() => {
-    // Get the image path from environment variable
-    const baseImagePath = process.env.NEXT_PUBLIC_IMAGE_PATH || ""
+  // Define possible image paths to try
+  const imagePaths = [
+    // First try with environment variable if available
+    process.env.NEXT_PUBLIC_IMAGE_PATH ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}/enterprise.png` : null,
+    // Then try common public directories
+    "/assets/enterprise.png",
+    "/images/enterprise.png",
+    "/enterprise.png",
+    // Finally use a placeholder
+    "/interconnected-business-network.png",
+  ].filter(Boolean) // Remove null values
 
-    // Log for debugging
-    console.log("Image base path:", baseImagePath)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const currentImage = imagePaths[currentImageIndex]
 
-    // Set the full image path
-    setImgSrc(`${baseImagePath}/enterprise.png`)
-  }, [])
+  // Try the next image in the list if current one fails
+  const tryNextImage = () => {
+    if (currentImageIndex < imagePaths.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1)
+      setImageError(false)
+    } else {
+      // We've tried all images, show error state
+      setImageError(true)
+    }
+  }
 
   return (
     <motion.section
@@ -40,29 +55,33 @@ const EnterpriseSuite = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            {imgError || !imgSrc ? (
+            {imageError ? (
               <div className="absolute inset-0 flex items-center justify-center text-white text-xl">
                 <p>Enterprise Suite Image</p>
               </div>
             ) : (
-              <Image
-                src={imgSrc || "/placeholder.svg"}
-                alt="Enterprise Suite"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 66vw"
-                onError={(e) => {
-                  console.error("Image failed to load from:", imgSrc)
-                  setImgError(true)
+              <div className="relative w-full h-full min-h-[600px]">
+                <Image
+                  src={currentImage || "/placeholder.svg"}
+                  alt="Enterprise Suite"
+                  fill
+                  priority
+                  className={`object-cover transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                  sizes="(max-width: 768px) 100vw, 66vw"
+                  onLoad={() => setImageLoaded(true)}
+                  onError={() => {
+                    console.error("Image failed to load from:", currentImage)
+                    tryNextImage()
+                  }}
+                />
 
-                  // Try fallback to direct path as last resort
-                  if (imgSrc.includes(process.env.NEXT_PUBLIC_IMAGE_PATH || "")) {
-                    setImgSrc("/assets/enterprise.png")
-                    setImgError(false)
-                  }
-                }}
-              />
+                {/* Show loading state while image is loading */}
+                {!imageLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                  </div>
+                )}
+              </div>
             )}
           </motion.div>
 
@@ -95,7 +114,7 @@ const EnterpriseSuite = () => {
 
               {/* Animated Button */}
               <motion.a
-                href={process.env.DASHBOARD_URL || "#"}
+                href={process.env.NEXT_PUBLIC_DASHBOARD_URL || "#"}
                 className="px-8 py-3 bg-white text-black rounded-lg font-semibold hover:bg-[#FF6B35] hover:text-white transition"
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}

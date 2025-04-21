@@ -26,8 +26,9 @@ export default function ESGCommitmentPage() {
             reduce waste.
           </li>
           <li className="mb-2">
-            <span className="font-semibold text-[#003087]">Renewable Energy Investments:</span> We are committed to using
-            100% renewable energy in our offices, campuses, and data centers by 2030, reducing reliance on fossil fuels.
+            <span className="font-semibold text-[#003087]">Renewable Energy Investments:</span> We are committed to
+            using 100% renewable energy in our offices, campuses, and data centers by 2030, reducing reliance on fossil
+            fuels.
           </li>
           <li className="mb-2">
             <span className="font-semibold text-[#003087]">E-Waste Management & Circular Economy:</span> We recycle,
@@ -94,9 +95,9 @@ export default function ESGCommitmentPage() {
             education, and cybersecurity training.
           </li>
           <li className="mb-2">
-            <span className="font-semibold text-[#003087]">AI for Good Initiatives:</span> We develop AI-driven solutions
-            for public health, climate change mitigation, and disaster response, ensuring that advanced technology
-            serves global humanitarian needs.
+            <span className="font-semibold text-[#003087]">AI for Good Initiatives:</span> We develop AI-driven
+            solutions for public health, climate change mitigation, and disaster response, ensuring that advanced
+            technology serves global humanitarian needs.
           </li>
           <li className="mb-2">
             <span className="font-semibold text-[#003087]">Tech for Nonprofits & Small Businesses:</span> We offer

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import { ImageWithFallback } from "@/components/ui/image-with-fallback"
 
 export interface QualityDigitalService {
   number: string
@@ -81,11 +81,13 @@ export default function QualityDigital({
               transition={{ duration: 0.5 }}
               className="absolute top-0 right-0 w-4/5 h-[400px]"
             >
-              <Image
-                src={images.topImage || "/placeholder.svg"}
+              <ImageWithFallback
+                src={images.topImage || "/placeholder.svg?height=400&width=500&query=business meeting"}
                 alt="Business professionals in meeting"
                 fill
                 className="object-cover rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                fallbackSrc="/collaborative-strategy-session.png"
               />
             </motion.div>
             <motion.div
@@ -94,11 +96,13 @@ export default function QualityDigital({
               transition={{ duration: 0.5, delay: 0.2 }}
               className="absolute bottom-0 left-0 w-4/5 h-[400px]"
             >
-              <Image
-                src={images.bottomImage || "/placeholder.svg"}
+              <ImageWithFallback
+                src={images.bottomImage || "/placeholder.svg?height=400&width=500&query=team collaboration"}
                 alt="Team collaboration"
                 fill
                 className="object-cover rounded-lg shadow-xl"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                fallbackSrc="/diverse-team-brainstorm.png"
               />
             </motion.div>
           </div>

@@ -1,9 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { FaTwitter, FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa"
 import { useState, useEffect } from "react"
+
+// Import the ImageWithFallback component
+import { OptimizedImage } from "@/components/ui/optimized-image"
 
 // Change the export from default to named export
 export const Footer = () => {
@@ -26,6 +28,15 @@ export const Footer = () => {
         ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}/logo-white.png`
         : "/assets/logo-white.png")
     setLogoUrl(envLogoUrl)
+
+    // Preload footer logo
+    if (typeof window !== "undefined" && logoUrl) {
+      const link = document.createElement("link")
+      link.rel = "preload"
+      link.as = "image"
+      link.href = logoUrl
+      document.head.appendChild(link)
+    }
   }, [])
 
   // Handle image errors
@@ -49,9 +60,10 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Left Section: Logo & Description */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            {/* Replace the Image component for the logo */}
             {logoUrl && !logoError ? (
-              <Image
-                src={logoUrl || "/placeholder.svg"}
+              <OptimizedImage
+                src={logoUrl || "/placeholder.svg?height=50&width=150&query=logo white"}
                 alt="Prime Logic Solutions Logo"
                 width={150}
                 height={50}
