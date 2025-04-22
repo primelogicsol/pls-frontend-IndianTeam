@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Phone, Mail, MapPin, Loader2, Check } from "lucide-react"
 import { motion } from "framer-motion"
 import { Input } from "@/components/ui/input"
@@ -30,14 +30,7 @@ export default function Appointment() {
   const [responseMessage, setResponseMessage] = useState("")
   const { toast } = useToast()
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    address: "",
-    detail: "",
-    service: "",
-  })
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
   const {
     register,
@@ -57,20 +50,29 @@ export default function Appointment() {
 
       const formDataToSubmit = {
         ...data,
-        date: combinedDateTime,
+        bookingDate: combinedDateTime,
       }
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/consultation/requestAConsultation`, {
+      // Make sure the API URL is properly set in your environment variables
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}consultation/requestAConsultation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formDataToSubmit),
+        // Add this to ensure cookies are sent with the request if needed
+        credentials: "include",
       })
-      // const response = await submitConsultation(data)
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`)
+      }
 
       const responseData = await response.json()
+
       if (responseData.success) {
         setIsSubmitted(true)
         setResponseMessage(responseData.message)
+
+        // Clear the form
         reset()
 
         // Show success toast notification
@@ -87,7 +89,7 @@ export default function Appointment() {
           setIsSubmitted(false)
         }, 8000)
       } else {
-        setResponseMessage(responseData.message)
+        setResponseMessage(responseData.message || "There was an error submitting your request. Please try again.")
 
         // Show error toast
         toast({

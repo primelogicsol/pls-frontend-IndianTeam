@@ -58,7 +58,7 @@ export default function EnhancedSiteHeader() {
         resizeObserver.unobserve(currentHeaderRef)
       }
     }
-  }, [scrolled])
+  }, [])
 
   // Lock scroll when mobile menu is open
   useEffect(() => {
