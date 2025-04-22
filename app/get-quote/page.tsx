@@ -1,4 +1,5 @@
 "use client"
+
 import { useForm } from "react-hook-form"
 import Loader from "@/components/ui/loader"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -6,35 +7,45 @@ import { getQuoteSchema, type FormData } from "@/validation/schema"
 import { axios } from "@/config/axios"
 import { useMessage } from "@/hooks/useMessage"
 import { useLoading } from "@/hooks/useLoading"
-import { toast } from "@/components/ui/use-toast"
+import { useState } from "react"
+import { toast } from 'react-toastify';
 
 export default function GetQuotePage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(getQuoteSchema),
   })
-  const { errorMessage, successMessage } = useMessage()
-  const { startLoading, stopLoading, isLoading } = useLoading()
-  const onSubmit = async (data: FormData) => {
-    try {
-      // Convert deadline to local string before submission
-      if (data.deadline) {
-        data.deadline = new Date(data.deadline).toLocaleString()
-      }
-      startLoading()
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}getQuotes/createQuote`, data)
-      toast({
-        title: "Quote Submitted",
-        description: "Your quote has been submitted successfully.",
-        duration: 5000,
-      })
-    } catch (error) {
-      console.error("Error submitting form:", error)
 
-      return errorMessage("Something went wrong while submitting quote")
+  const { errorMessage } = useMessage()
+  const { startLoading, stopLoading, isLoading } = useLoading()
+  const [ loading, setLoading ] = useState(false) 
+
+  const onSubmit = async (data: FormData) => {
+    setLoading(true)
+    // alert("Form submission started!") // 🧪 Remove after debugging
+    // console.log("Submitting data:", data)
+
+    try {
+      startLoading()
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}getQuotes/createQuote`, data)
+      console.log("Response received:", res.data)
+
+      toast.success('Quote submitted successfully!');
+
+      // reset() 
+      window.location.reload()
+      console.log("Form has been reset")
+    } catch (error: any) {
+      
+      toast.error('Something went wrong.'); 
+      setLoading(false)   
+      // window.location.reload()
+      console.error("Submission error:", error.response?.data || error.message)
+      errorMessage("Something went wrong while submitting quote")
     } finally {
       stopLoading()
     }
@@ -84,7 +95,7 @@ export default function GetQuotePage() {
             </label>
             <input
               id="phone"
-              type="phone"
+              type="number"
               {...register("phone")}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#003087] text-black ${
                 errors.phone ? "border-red-500" : "border-gray-300"
@@ -177,9 +188,14 @@ export default function GetQuotePage() {
           <div>
             <button
               type="submit"
-              className="w-full bg-[#003366] flex items-center justify-center text-white py-3 px-4 rounded-md hover:bg-[#003366]/70 duration-300 transition-background hover:text-white/70"
+              className="w-full bg-[#003366] flex items-center justify-center text-white py-3 px-4 rounded-md hover:bg-[#003366]/70 transition duration-300"
             >
-              {isLoading ? <Loader /> : <span>Submit Quote</span>}
+              {/* {isLoading ? <Loader /> : <span>Submit Quote</span>} */}
+              {loading ? (
+                <span>Submiting...</span>
+              ) : (
+                <span>Submit Quote</span>
+              )}
             </button>
           </div>
         </form>

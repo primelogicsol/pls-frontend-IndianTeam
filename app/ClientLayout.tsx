@@ -10,6 +10,8 @@ import { ToastProvider } from "@/components/ui/toast"
 import { PerformanceMonitor } from "@/components/performance-monitor"
 import { registerServiceWorker } from "@/lib/register-sw"
 import { useEffect } from "react"
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 // Add the PerformanceMonitor component to the layout
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
@@ -41,9 +43,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
           <PerformanceMonitor />
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <ToastProvider>
+            <ToastContainer />
               <div className="flex-1">{children}</div>
-            </ToastProvider>
             <FooterCard />
             <Footer />
           </div>
