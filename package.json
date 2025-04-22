@@ -93,6 +93,7 @@
     "postgres": "latest",
     "react": "^19",
     "react-beautiful-dnd": "latest",
+    "react-datepicker": "^8.3.0",
     "react-day-picker": "8.10.1",
     "react-dom": "^19",
     "react-hook-form": "^7.54.1",

@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { consultationSchema, type ConsultationFormData } from "@/validation/consultationschema"
 import { useToast } from "@/hooks/use-toast"
+import { toast } from 'react-toastify';
 
 // Contact Card Component
 const ContactCard = ({ icon, title, detail }: { icon: React.ReactNode; title: string; detail: string }) => (
@@ -23,14 +24,28 @@ const ContactCard = ({ icon, title, detail }: { icon: React.ReactNode; title: st
     </div>
   </div>
 )
+const isWeekend = (dateString: string): boolean => {
+  const date = new Date(dateString)
+  const day = date.getDay()
+  return day === 0 || day === 6 // 0 is Sunday, 6 is Saturday
+}
 
 export default function Appointment() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [responseMessage, setResponseMessage] = useState("")
-  const { toast } = useToast()
+  const [minDate, setMinDate] = useState("")
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL
+
+  // Set minimum date to today when component mounts
+  useEffect(() => {
+    const today = new Date()
+    const year = today.getFullYear()
+    const month = String(today.getMonth() + 1).padStart(2, "0")
+    const day = String(today.getDate()).padStart(2, "0")
+    setMinDate(`${year}-${month}-${day}`)
+  }, [])
 
   const {
     register,
@@ -63,6 +78,9 @@ export default function Appointment() {
       })
 
       if (!response.ok) {
+        const errorData = await response.json()
+        setResponseMessage(errorData.message || "An error occurred while submitting the form.")
+        toast.error(errorData.message || "An error occurred while submitting the form.")
         throw new Error(`API error: ${response.status}`)
       }
 
@@ -76,13 +94,7 @@ export default function Appointment() {
         reset()
 
         // Show success toast notification
-        toast({
-          title: "Consultation Request Submitted!",
-          description:
-            responseData.message ||
-            "Your consultation request has been successfully submitted. We'll contact you soon.",
-          variant: "default",
-        })
+        toast.success("Consultation request submitted successfully!" )
 
         // Reset success message after 8 seconds
         setTimeout(() => {
@@ -92,22 +104,14 @@ export default function Appointment() {
         setResponseMessage(responseData.message || "There was an error submitting your request. Please try again.")
 
         // Show error toast
-        toast({
-          title: "Submission Failed",
-          description: responseData.message || "There was an error submitting your request. Please try again.",
-          variant: "destructive",
-        })
+        
       }
     } catch (error) {
       console.error("Error submitting consultation request:", error)
       setResponseMessage("An unexpected error occurred. Please try again.")
 
       // Show error toast for exceptions
-      toast({
-        title: "Error",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive",
-      })
+      // toast.error("An unexpected error occurred. Please try again."+ error.message)
     } finally {
       setIsLoading(false)
     }
@@ -213,8 +217,15 @@ export default function Appointment() {
                     {...register("phone")}
                     className="w-full px-4 py-2 rounded-lg"
                     aria-invalid={errors.phone ? "true" : "false"}
+                    maxLength={10}
+                    onInput={(e) => {
+                      // Allow only digits and limit to 10 characters
+                      const input = e.currentTarget
+                      input.value = input.value.replace(/\D/g, "").slice(0, 10)
+                    }}
                   />
                   {errors.phone && <p className="text-red-300 text-sm mt-1">{errors.phone.message}</p>}
+                  <p className="text-white/60 text-xs mt-1">Enter a 10-digit phone number</p>
                 </div>
 
                 <div>
@@ -230,6 +241,13 @@ export default function Appointment() {
                     {...register("date")}
                     className="w-full px-4 py-2 rounded-lg mb-2"
                     aria-invalid={errors.date ? "true" : "false"}
+                    min={minDate} // Set minimum date to today
+                    onChange={(e) => {
+                      if (isWeekend(e.target.value)) {
+                        e.target.value = ""
+                        toast.error("Weekend dates are not available. Please select a weekday (Monday to Friday).")
+                      }
+                    }}
                   />
                   <select
                     {...register("time")}
