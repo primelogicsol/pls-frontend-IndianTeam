@@ -1,6 +1,8 @@
 name: Deploy Next.js with Bun
 
 on:
+  push:
+    branches: [main]  # Will trigger on direct pushes to main
   pull_request:
     types: [closed]
     branches: [main]  # Will trigger when PRs to main are closed
@@ -27,7 +29,14 @@ jobs:
           ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd ${{ secrets.VPS_DEPLOY_PATH }}
             git pull
+            
+            # Add Node.js bin directory to PATH for PM2
+            export PATH=$PATH:/home/deployerdev/.nvm/versions/node/v22.11.0/bin
+            
+            # Add Bun to PATH if needed (adjust the path if different)
+            export PATH=$PATH:$HOME/.bun/bin
+            
             bun install
             bun run build
-            pm2 restart pls-frontend
+            pm2 restart pls-frontend || pm2 start bun --name pls-frontend -- run start
           EOF
