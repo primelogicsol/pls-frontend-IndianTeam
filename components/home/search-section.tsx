@@ -12,7 +12,7 @@ export default function SearchSection() {
   const [logoImgError, setLogoImgError] = useState(false)
 
   useEffect(() => {
-    const baseImagePath = process.env.NEXT_PUBLIC_IMAGE_PATH || ""
+    const baseImagePath = process.env.NEXT_PUBLIC_IMAGE_PATH || "/assets"
     console.log("Image base path in search-section:", baseImagePath)
 
     // Set initial image paths using environment variable

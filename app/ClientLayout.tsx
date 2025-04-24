@@ -35,8 +35,8 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://primelogicsolutions.com" />
         <meta property="og:image" content="https://primelogicsolutions.com/og-image.jpg" />
-        <link rel="preconnect" href={process.env.NEXT_PUBLIC_IMAGE_PATH || ""} />
-        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_IMAGE_PATH || ""} />
+        <link rel="preconnect" href={process.env.NEXT_PUBLIC_IMAGE_PATH || "/assests"} />
+        <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_IMAGE_PATH || "/assests"} />
       </head>
       <body className="min-h-screen bg-background font-sans antialiased">
         <Providers>

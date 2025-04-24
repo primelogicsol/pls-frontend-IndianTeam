@@ -179,7 +179,7 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
             </div>
           ) : (
             <ImageWithFallback
-              src={sortedSlides[safePrevIndex].image || "/placeholder.svg?height=1080&width=1920&query=hero slide"}
+              src={sortedSlides[safePrevIndex].image || "/assests/5.png"}
               alt={`Slide ${safePrevIndex + 1}: ${sortedSlides[safePrevIndex].heading}`}
               fill
               quality={85}

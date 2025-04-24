@@ -25,7 +25,7 @@ export const Footer = () => {
     const envLogoUrl =
       process.env.NEXT_PUBLIC_FOOTER_LOGO_URL ||
       (process.env.NEXT_PUBLIC_IMAGE_PATH
-        ? `${process.env.NEXT_PUBLIC_IMAGE_PATH}/logo-white.png`
+        ? `/assets/logo-white.png`
         : "/assets/logo-white.png")
     setLogoUrl(envLogoUrl)
 
