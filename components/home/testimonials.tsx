@@ -5,7 +5,7 @@ import { ChevronRight, ChevronLeft } from "lucide-react"
 import Image from "next/image"
 
 const getImagePath = (imageName: string) => {
-  const basePath = process.env.NEXT_PUBLIC_IMAGE_PATH || ""
+  const basePath = process.env.NEXT_PUBLIC_IMAGE_PATH || "/assets"
   // Handle cases where basePath might already end with a slash or imageName might start with one
   const separator = basePath.endsWith("/") || imageName.startsWith("/") ? "" : "/"
   return `${basePath}${separator}${imageName.startsWith("/") ? imageName.substring(1) : imageName}`

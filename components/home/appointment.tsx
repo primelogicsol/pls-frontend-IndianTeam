@@ -157,8 +157,8 @@ export default function Appointment() {
               />
               <ContactCard
                 icon={<MapPin className="w-6 h-6 text-white" />}
-                title="VISIT OFFICE"
-                detail="4445 Corporation Ln Ste 264, Virginia Beach, Virginia 23462 - USA"
+                title="VISIT OFFICE TO OFFICE HOURS"
+                detail="11166 Fairfax Blvd Ste 500, Fairfax, VA 22030"
               />
               <ContactCard
                 icon={<MapPin className="w-6 h-6 text-white" />}

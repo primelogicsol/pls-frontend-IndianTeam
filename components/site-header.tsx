@@ -41,7 +41,7 @@ export function SiteHeader() {
   const [scrolledLogoError, setScrolledLogoError] = useState(false)
   const [submenuImages, setSubmenuImages] = useState<Record<string, string>>({})
   const headerRef = useRef<HTMLDivElement>(null)
-  const imagePath = process.env.NEXT_PUBLIC_IMAGE_PATH || ""
+  const imagePath = process.env.NEXT_PUBLIC_IMAGE_PATH || "/assets"
 
   // Set up logo sources and submenu images from environment variables
   useEffect(() => {

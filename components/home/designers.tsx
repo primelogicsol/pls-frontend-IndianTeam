@@ -5,56 +5,56 @@ import { User } from "lucide-react"
 import Link from "next/link"
 
 // Get the image path from environment variable
-const IMAGE_PATH = process.env.NEXT_PUBLIC_IMAGE_PATH || ""
+const IMAGE_PATH = process.env.NEXT_PUBLIC_IMAGE_PATH || "/assets"
 
 const designers = [
   {
     name: "Liam R.",
-    title: "Graphic Designer & Illustrator",
+    title: "Full Stack Developer & Software Engineer",
     rating: "5.0",
     jobs: "72 jobs",
     iconColor: "#FF6B35",
-    best: "Expert in branding and digital illustrations, known for creativity and attention to detail.",
+    best: "Expert in building scalable web applications, proficient in both front-end and back-end development.",
   },
   {
     name: "Noah J.",
-    title: "Creative Director & Designer",
+    title: "Senior Full Stack Developer",
     rating: "4.9",
     jobs: "615 jobs",
     iconColor: "#003087",
-    best: "Specializes in UI/UX design with a strong portfolio in web and app interfaces.",
+    best: "Specializes in UI/UX-driven development with extensive experience in React, Node.js, and cloud infrastructure.",
   },
   {
     name: "Ethan M.",
-    title: "Senior Graphic Designer",
+    title: "Lead Full Stack Engineer",
     rating: "4.9",
     jobs: "150 jobs",
     iconColor: "#FF6B35",
-    best: "Brings a modern touch to logo design and brand identity projects.",
+    best: "Delivers modern, responsive, and efficient web apps using MERN stack and DevOps tools.",
   },
   {
     name: "Benjamin T.",
-    title: "Freelance Visual Designer",
+    title: "Freelance Full Stack Developer",
     rating: "4.8",
     jobs: "1025 jobs",
     iconColor: "#003087",
-    best: "Known for sleek and innovative designs in both print and digital media.",
+    best: "Known for delivering high-performance applications with clean architecture and secure code.",
   },
   {
     name: "Oliver K.",
-    title: "Motion Graphics Specialist",
+    title: "Full Stack Developer & DevOps Enthusiast",
     rating: "4.9",
     jobs: "867 jobs",
     iconColor: "#FF6B35",
-    best: "Excels in animations, video editing, and dynamic visual storytelling.",
+    best: "Excels in CI/CD automation, containerized deployments, and scalable microservices development.",
   },
   {
     name: "Sophia L.",
-    title: "Creative Graphic Designer",
+    title: "Full Stack Software Developer",
     rating: "5.0",
     jobs: "342 jobs",
     iconColor: "#003087",
-    best: "Master of minimalist yet impactful designs with a keen eye for aesthetics.",
+    best: "Master of crafting seamless user experiences with React and robust APIs with Django and Node.js.",
   },
 ]
 
