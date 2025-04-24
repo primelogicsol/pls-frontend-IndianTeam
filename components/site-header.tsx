@@ -49,7 +49,7 @@ export function SiteHeader() {
     const basePath = imagePath.endsWith("/") ? imagePath : `${imagePath}/`
 
     // For the default logo (non-scrolled state) - plogic.png
-    setLogoSrc(`${basePath}plogic.png`)
+    setLogoSrc(`/assets/plogic.png`)
 
     // For the scrolled logo - logo1.png
     setScrolledLogoSrc(`${basePath}logo1.png`)
