@@ -1,8 +1,6 @@
 name: Deploy Next.js with Bun
 
 on:
-  push:
-    branches: [main]  # Will trigger on direct pushes to main
   pull_request:
     types: [closed]
     branches: [main]  # Will trigger when PRs to main are closed
