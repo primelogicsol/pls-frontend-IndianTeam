@@ -26,11 +26,12 @@ const formSchema = z.object({
   niche: z.string().min(2, { message: "Please specify your skills/niche." }),
   address: z.string().min(2, { message: "Please enter your address." }),
   country: z.string().min(2, { message: "Please enter your country." }),
-  yearOfExperience: z.string().min(1, { message: "Please enter your years of experience." }),
+  yearsOfExperience: z.string().min(1, { message: "Please enter your years of experience." }),
 })
 
 // Server action to handle form submission
 async function submitFreelancerRegistration(formData: z.infer<typeof formSchema>) {
+  console.log(typeof formData.yearsOfExperience)
   try {
     const response = await axios.post("https://api.primelogicsol.com/api/v1/freelancer/getFreeLancerJoinUsRequest", formData);
 
@@ -64,7 +65,7 @@ export default function RegisterPage() {
       niche: "",
       address: "",
       country: "",
-      yearOfExperience: "",
+      yearsOfExperience: "",
     },
   })
 
@@ -220,12 +221,12 @@ export default function RegisterPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="yearOfExperience"
+                  name="yearsOfExperience"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Years of Experience</FormLabel>
                       <FormControl>
-                        <Input placeholder="5" {...field} />
+                        <Input type="text" placeholder="5" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

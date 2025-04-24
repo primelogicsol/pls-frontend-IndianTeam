@@ -140,79 +140,82 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white">
-      <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#003087] text-center mb-10">
-        Trusted by leading brands and startups
-      </h2>
+    // <section className="mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-white">
+    //   <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#003087] text-center mb-10">
+    //     Trusted by leading brands and startups
+    //   </h2>
 
-      <div className="relative flex items-center justify-center">
-        {/* Left Button */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
-        >
-          <ChevronLeft className="w-6 h-6 text-gray-600" />
-        </button>
+    //   <div className="relative flex items-center justify-center">
+    //     {/* Left Button */}
+    //     <button
+    //       onClick={prevSlide}
+    //       className="absolute left-4 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
+    //     >
+    //       <ChevronLeft className="w-6 h-6 text-gray-600" />
+    //     </button>
 
-        {/* Testimonials Container */}
-        <div className="overflow-hidden w-full max-w-5xl">
-          <div
-            className="flex transition-transform duration-500 ease-out"
-            style={{ transform: `translateX(-${currentSlide * (100 / slidesPerView)}%)` }}
-          >
-            {testimonials.map((t, index) => (
-              <div key={index} className="w-full flex-shrink-0 px-3" style={{ flex: `0 0 ${100 / slidesPerView}%` }}>
-                <div className="rounded-xl p-6 bg-white shadow-md border-4 border-[#003087] transition group hover:bg-[#003087] hover:border-white h-full flex flex-col justify-between">
-                  {/* Logo - Always Visible */}
-                  <div className="mb-4 bg-transparent flex justify-center">
-                    <Image
-                      src={t.logo || getImagePath("placeholder.png")}
-                      alt={`${t.company} logo`}
-                      width={200}
-                      height={100}
-                      className="transition object-contain"
-                      onError={(e) => {
-                        console.error(`Failed to load image: ${t.logo}`)
-                        // @ts-ignore - TypeScript doesn't know about currentTarget.src
-                        e.currentTarget.src = getImagePath("placeholder.png")
-                      }}
-                    />
-                  </div>
+    //     {/* Testimonials Container */}
+    //     <div className="overflow-hidden w-full max-w-5xl">
+    //       <div
+    //         className="flex transition-transform duration-500 ease-out"
+    //         style={{ transform: `translateX(-${currentSlide * (100 / slidesPerView)}%)` }}
+    //       >
+    //         {testimonials.map((t, index) => (
+    //           <div key={index} className="w-full flex-shrink-0 px-3" style={{ flex: `0 0 ${100 / slidesPerView}%` }}>
+    //             <div className="rounded-xl p-6 bg-white shadow-md border-4 border-[#003087] transition group hover:bg-[#003087] hover:border-white h-full flex flex-col justify-between">
+    //               {/* Logo - Always Visible */}
+    //               <div className="mb-4 bg-transparent flex justify-center">
+    //                 <Image
+    //                   src={t.logo || getImagePath("placeholder.png")}
+    //                   alt={`${t.company} logo`}
+    //                   width={200}
+    //                   height={100}
+    //                   className="transition object-contain"
+    //                   onError={(e) => {
+    //                     console.error(`Failed to load image: ${t.logo}`)
+    //                     // @ts-ignore - TypeScript doesn't know about currentTarget.src
+    //                     e.currentTarget.src = getImagePath("placeholder.png")
+    //                   }}
+    //                 />
+    //               </div>
 
-                  <blockquote className="text-lg text-gray-800 mb-3 mt-4 text-center group-hover:text-white">
-                    {t.quote}
-                  </blockquote>
-                  <cite className="text-gray-600 block mb-4 mt-4 text-center group-hover:text-white">{t.author}</cite>
-                  <div className="border-t border-gray-200 pt-3 group-hover:border-white">
-                    <h3 className="text-gray-800 text-sm mb-2 text-center group-hover:text-white">Results</h3>
-                    <div className="space-y-2">
-                      {t.results.map((result, idx) => (
-                        <div key={idx} className="text-center">
-                          <div className="text-lg font-medium text-gray-900 group-hover:text-white">
-                            {result.metric}
-                          </div>
-                          <div className="text-gray-600 text-sm group-hover:text-white">{result.description}</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+    //               <blockquote className="text-lg text-gray-800 mb-3 mt-4 text-center group-hover:text-white">
+    //                 {t.quote}
+    //               </blockquote>
+    //               <cite className="text-gray-600 block mb-4 mt-4 text-center group-hover:text-white">{t.author}</cite>
+    //               <div className="border-t border-gray-200 pt-3 group-hover:border-white">
+    //                 <h3 className="text-gray-800 text-sm mb-2 text-center group-hover:text-white">Results</h3>
+    //                 <div className="space-y-2">
+    //                   {t.results.map((result, idx) => (
+    //                     <div key={idx} className="text-center">
+    //                       <div className="text-lg font-medium text-gray-900 group-hover:text-white">
+    //                         {result.metric}
+    //                       </div>
+    //                       <div className="text-gray-600 text-sm group-hover:text-white">{result.description}</div>
+    //                     </div>
+    //                   ))}
+    //                 </div>
+    //               </div>
 
-                  {/* Powered By */}
-                  <p className="text-sm text-gray-500 mt-4 text-center group-hover:text-white">{t.poweredBy}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+    //               {/* Powered By */}
+    //               <p className="text-sm text-gray-500 mt-4 text-center group-hover:text-white">{t.poweredBy}</p>
+    //             </div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
 
-        {/* Right Button */}
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
-        >
-          <ChevronRight className="w-6 h-6 text-gray-600" />
-        </button>
-      </div>
-    </section>
+    //     {/* Right Button */}
+    //     <button
+    //       onClick={nextSlide}
+    //       className="absolute right-4 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
+    //     >
+    //       <ChevronRight className="w-6 h-6 text-gray-600" />
+    //     </button>
+    //   </div>
+    // </section>
+    <p>
+      testimonials
+    </p>
   )
 }
