@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { FaTwitter, FaFacebookF, FaLinkedinIn, FaInstagram } from "react-icons/fa"
 import { useState, useEffect } from "react"
+import Image from "next/image";
 
 // Import the ImageWithFallback component
 import { OptimizedImage } from "@/components/ui/optimized-image"
@@ -62,12 +63,12 @@ export const Footer = () => {
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             {/* Replace the Image component for the logo */}
             {logoUrl && !logoError ? (
-              <OptimizedImage
-                src={logoUrl || "/placeholder.svg?height=50&width=150&query=logo white"}
-                alt="Prime Logic Solutions Logo"
-                width={150}
-                height={50}
-                priority
+              <Image
+                  src={"/assets/plogic.png"}
+                  alt="Prime Logic Solutions Logo"
+                  width={150}
+                  height={50}
+                  priority
               />
             ) : (
               <div className="text-2xl font-bold text-white">Prime Logic</div>

@@ -62,7 +62,7 @@ const EnterpriseSuite = () => {
             ) : (
               <div className="relative w-full h-full min-h-[600px]">
                 <Image
-                  src={currentImage || "/placeholder.svg"}
+                  src={currentImage || "/assets/plogic.png"}
                   alt="Enterprise Suite"
                   fill
                   priority
