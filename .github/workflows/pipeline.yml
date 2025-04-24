@@ -1,16 +1,13 @@
 name: Deploy Next.js with Bun
-
 on:
-  push:
-    branches: [main]  # Will trigger on direct pushes to main
+  workflow_dispatch:  # Manual trigger
   pull_request:
     types: [closed]
     branches: [main]  # Will trigger when PRs to main are closed
-
 jobs:
   deploy:
     # For PR triggers, only run when actually merged
-    if: github.event_name == 'push' || github.event.pull_request.merged == true
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     
     steps:
