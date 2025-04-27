@@ -119,7 +119,7 @@ export default function Appointment() {
     <section className="relative py-16 mb-32 md:py-24 dark:bg-white">
       {/* Background Overlay */}
       <div className="absolute inset-0 overflow-hidden">
-        <img src="/assets/4.png" alt="Background" className="w-full h-full object-cover" />
+        <img src="/assets/enterprise.png" alt="Background" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-[#111827] bg-opacity-80"></div>
       </div>
       <div className="container mx-auto px-4 relative">
