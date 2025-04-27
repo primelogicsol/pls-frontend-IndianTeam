@@ -11,8 +11,7 @@ import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { consultationSchema, type ConsultationFormData } from "@/validation/consultationschema"
-import { useToast } from "@/hooks/use-toast"
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify"
 
 // Contact Card Component
 const ContactCard = ({ icon, title, detail }: { icon: React.ReactNode; title: string; detail: string }) => (
@@ -94,7 +93,7 @@ export default function Appointment() {
         reset()
 
         // Show success toast notification
-        toast.success("Consultation request submitted successfully!" )
+        toast.success("Consultation request submitted successfully!")
 
         // Reset success message after 8 seconds
         setTimeout(() => {
@@ -104,7 +103,6 @@ export default function Appointment() {
         setResponseMessage(responseData.message || "There was an error submitting your request. Please try again.")
 
         // Show error toast
-        
       }
     } catch (error) {
       console.error("Error submitting consultation request:", error)
@@ -120,12 +118,10 @@ export default function Appointment() {
   return (
     <section className="relative py-16 mb-32 md:py-24 dark:bg-white">
       {/* Background Overlay */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.8)), url(${process.env.NEXT_PUBLIC_IMAGE_PATH}/4.png)`,
-        }}
-      />
+      <div className="absolute inset-0 overflow-hidden">
+        <img src="/assets/4.png" alt="Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[#111827] bg-opacity-80"></div>
+      </div>
       <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Information */}
