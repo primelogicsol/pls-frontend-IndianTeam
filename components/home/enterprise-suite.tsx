@@ -58,7 +58,7 @@ const EnterpriseSuite = () => {
             {imageError ? (
               <div className="absolute inset-0 flex items-center justify-center text-white text-xl">
                 <Image
-                  src="/assets/enterprise.jpg"
+                  src="/assets/enterprise.png"
                   alt="Enterprise Suite"
                   fill
                   priority
@@ -69,7 +69,7 @@ const EnterpriseSuite = () => {
             ) : (
               <div className="relative w-full h-full min-h-[600px]">
                 <Image
-                  src={"/assets/enterprise.jpg"}
+                  src={"/assets/enterprise.png"}
                   alt="Enterprise Suite"
                   fill
                   priority
