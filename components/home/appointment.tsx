@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { Phone, Mail, MapPin, Loader2, Check } from "lucide-react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -117,10 +118,22 @@ export default function Appointment() {
 
   return (
     <section className="relative py-16 mb-32 md:py-24 dark:bg-white">
-      {/* Background Overlay */}
+      {/* Background Image with Next.js Image component */}
       <div className="absolute inset-0 overflow-hidden">
-        <img src="/assets/enterprise.png" alt="Background" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#111827] bg-opacity-80"></div>
+        <div className="relative w-full h-full">
+          <Image
+            src="/assets/4.png"
+            alt="Enterprise background"
+            fill
+            priority
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+            }}
+          />
+          <div className="absolute inset-0 bg-[#111827] bg-opacity-80"></div>
+        </div>
       </div>
       <div className="container mx-auto px-4 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
