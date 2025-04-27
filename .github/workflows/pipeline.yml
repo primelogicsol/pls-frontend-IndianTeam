@@ -1,0 +1,41 @@
+name: Deploy Next.js with Bun
+on:
+ push:
+    branches: [main]
+  # workflow_dispatch:  # Manual trigger
+ pull_request:
+    types: [closed]
+    branches: [main]  # Will trigger when PRs to main are closed
+jobs:
+  deploy:
+    # For PR triggers, only run when actually merged
+    #if: github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+      - name: Add known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -t rsa ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+          
+      - name: Deploy to VPS
+        run: |
+          ssh ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            cd ${{ secrets.VPS_DEPLOY_PATH }}
+            git pull
+            
+            # Add Node.js bin directory to PATH for PM2
+            export PATH=$PATH:/home/deployerdev/.nvm/versions/node/v22.11.0/bin
+            
+            # Add Bun to PATH if needed (adjust the path if different)
+            export PATH=$PATH:$HOME/.bun/bin
+            
+            bun install
+            bun run build
+            pm2 restart pls-frontend || pm2 start bun --name pls-frontend -- run start
+          EOF
