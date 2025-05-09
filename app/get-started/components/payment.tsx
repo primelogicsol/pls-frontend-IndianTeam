@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
+import Appointment from "@/components/home/appointment"
 
 interface ProceedOptionsProps {
   projectData?: any
@@ -241,7 +242,7 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
         {/* Proceed Button */}
         <div className="flex justify-center mt-8">
           {selectedOption === "consultation" ? (
-            <Link href="../appointments" prefetch={true}>
+            <Link href="/consultation" prefetch={true}>
               <Button className="px-8 py-6 text-lg bg-[#FF6B35] hover:bg-[#e55a29] flex items-center gap-2">
                 Book Consultation <Calendar className="ml-2 h-4 w-4" />
               </Button>
