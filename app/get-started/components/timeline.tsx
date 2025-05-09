@@ -1,13 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import React from "react"
 import { Check, Clock, Zap } from "lucide-react"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
+// Define timeline options
 const timelineOptions = [
   {
     id: "standard",
@@ -52,17 +51,62 @@ interface TimelineProps {
 }
 
 export default function Timeline({ selectedTimeline = "standard", onUpdate }: TimelineProps) {
-  const [localSelectedTimeline, setLocalSelectedTimeline] = useState(selectedTimeline)
+  // Use a ref to track if this is the first render
+  const isFirstRender = React.useRef(true)
 
-  // Remove the useEffect that was causing the loop
+  // Initialize state with the prop value or fallback to "standard"
+  const [localSelectedTimeline, setLocalSelectedTimeline] = React.useState(() => {
+    // Validate the selectedTimeline prop
+    const isValidTimeline = timelineOptions.some((option) => option.value === selectedTimeline)
+    return isValidTimeline ? selectedTimeline : "standard"
+  })
 
-  const handleTimelineChange = (value: string) => {
-    setLocalSelectedTimeline(value)
+  // Handle timeline selection change
+  const handleTimelineChange = React.useCallback(
+    (value: string) => {
+      try {
+        setLocalSelectedTimeline(value)
 
-    // Call onUpdate with the new timeline value
-    if (onUpdate) {
-      onUpdate(value)
+        // Call onUpdate with the new timeline value if it exists
+        if (typeof onUpdate === "function") {
+          onUpdate(value)
+        }
+      } catch (error) {
+        console.error("Error in handleTimelineChange:", error)
+      }
+    },
+    [onUpdate],
+  )
+
+  // Sync with prop changes, but skip the first render to avoid loops
+  React.useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false
+      return
     }
+
+    if (selectedTimeline && selectedTimeline !== localSelectedTimeline) {
+      const isValidTimeline = timelineOptions.some((option) => option.value === selectedTimeline)
+      if (isValidTimeline) {
+        setLocalSelectedTimeline(selectedTimeline)
+      }
+    }
+  }, [selectedTimeline, localSelectedTimeline])
+
+  // Find the selected option safely
+  const getSelectedOption = React.useMemo(() => {
+    return timelineOptions.find((option) => option.value === localSelectedTimeline) || timelineOptions[0]
+  }, [localSelectedTimeline])
+
+  // Error boundary
+  if (!timelineOptions || timelineOptions.length === 0) {
+    return (
+      <Card className="w-full">
+        <CardContent className="p-6">
+          <p>Timeline options are not available. Please try again later.</p>
+        </CardContent>
+      </Card>
+    )
   }
 
   return (
@@ -72,13 +116,22 @@ export default function Timeline({ selectedTimeline = "standard", onUpdate }: Ti
         <CardDescription>Choose your preferred project timeline</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
-        <RadioGroup value={localSelectedTimeline} onValueChange={handleTimelineChange} className="space-y-4">
+        {/* Simple radio buttons instead of RadioGroup if that's causing issues */}
+        <div className="space-y-4">
           {timelineOptions.map((option) => (
             <div key={option.id} className="flex items-start space-x-2">
-              <RadioGroupItem value={option.value} id={option.id} className="mt-1" />
+              <input
+                type="radio"
+                id={option.id}
+                name="timeline"
+                value={option.value}
+                checked={localSelectedTimeline === option.value}
+                onChange={() => handleTimelineChange(option.value)}
+                className="mt-1"
+              />
               <div className="grid gap-1.5 leading-none w-full">
                 <div className="flex items-center justify-between w-full">
-                  <Label
+                  <label
                     htmlFor={option.id}
                     className={cn(
                       "text-base font-medium flex items-center gap-2",
@@ -91,7 +144,7 @@ export default function Timeline({ selectedTimeline = "standard", onUpdate }: Ti
                       <Clock className="h-4 w-4 text-muted-foreground" />
                     )}
                     {option.label}
-                  </Label>
+                  </label>
 
                   <Badge
                     variant="outline"
@@ -108,7 +161,7 @@ export default function Timeline({ selectedTimeline = "standard", onUpdate }: Ti
               </div>
             </div>
           ))}
-        </RadioGroup>
+        </div>
 
         {localSelectedTimeline !== "standard" && (
           <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-md">
@@ -117,9 +170,7 @@ export default function Timeline({ selectedTimeline = "standard", onUpdate }: Ti
                 <Check className="h-4 w-4 text-amber-700" />
               </div>
               <div>
-                <p className="font-medium text-amber-800">
-                  You selected: {timelineOptions.find((o) => o.value === localSelectedTimeline)?.label}
-                </p>
+                <p className="font-medium text-amber-800">You selected: {getSelectedOption.label}</p>
                 <p className="text-sm text-amber-700 mt-1">
                   {localSelectedTimeline === "fast-track"
                     ? "System adds VIP Tag internally — your project will get high-priority assignment with daily updates."
@@ -143,7 +194,7 @@ export default function Timeline({ selectedTimeline = "standard", onUpdate }: Ti
         <div>
           <p className="text-sm font-medium">Selected Timeline:</p>
           <p className="text-sm text-muted-foreground">
-            {timelineOptions.find((option) => option.value === localSelectedTimeline)?.label}
+            {getSelectedOption.label}
             {localSelectedTimeline === "fast-track" && " (VIP)"}
           </p>
         </div>

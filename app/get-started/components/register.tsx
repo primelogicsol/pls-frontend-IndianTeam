@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { ChevronDown, AlertCircle } from "lucide-react"
 
 interface RegisterYourselfProps {
@@ -12,19 +12,24 @@ interface RegisterYourselfProps {
 
 export default function RegisterYourself({ formData = {}, onUpdate }: RegisterYourselfProps) {
   const [localFormData, setLocalFormData] = useState({
-    fullName: "",
-    businessEmail: "",
-    phoneNumber: "",
-    companyName: "",
-    companyWebsite: "",
-    businessAddress: "",
-    businessType: "",
-    referralSource: "",
+    fullName: "true",
+    businessEmail: "true",
+    phoneNumber: "true",
+    companyName: "false",
+    companyWebsite: "false",
+    businessAddress: "false",
+    businessType: "false",
+    referralSource: "false",
     ...formData,
   })
 
-  // Remove the useEffect that was causing the loop
-  // Instead, call onUpdate directly when form data changes
+  // Add useEffect to ensure parent component gets updated
+  useEffect(() => {
+    if (onUpdate) {
+      console.log("Updating parent with register data:", localFormData)
+      onUpdate(localFormData)
+    }
+  }, [localFormData, onUpdate])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
@@ -33,11 +38,6 @@ export default function RegisterYourself({ formData = {}, onUpdate }: RegisterYo
       [name]: value,
     }
     setLocalFormData(updatedData)
-
-    // Only call onUpdate after state is updated and if the function exists
-    if (onUpdate) {
-      onUpdate(updatedData)
-    }
   }
 
   // Business type options

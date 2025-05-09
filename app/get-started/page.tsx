@@ -31,6 +31,32 @@ interface RegisterYourselfData {
   [key: string]: string // Add index signature for dynamic access
 }
 
+interface FormData {
+  registerYourself: RegisterYourselfData
+  services: any[]
+  industries: any[]
+  technologies: any[]
+  features: any[]
+  specialOffers: {
+    discounts: any[]
+    appliedDiscount: number
+  }
+  timeline: string
+  budget: {
+    paymentMethod: string
+  }
+  estimate: {
+    accepted: boolean
+  }
+  agreement: {
+    accepted: boolean
+  }
+  proceedOptions: {
+    selectedOption: string | null
+    completed: boolean
+  }
+}
+
 interface Step {
   number: number
   name: string
@@ -39,41 +65,62 @@ interface Step {
   requiredFields?: string[]
 }
 
+// Storage keys
+const STORAGE_KEYS = {
+  FORM_DATA: "project_builder_form_data",
+  CURRENT_STEP: "project_builder_current_step",
+}
+
 export default function GetStartedPage() {
-  // Form data state with proper typing
-  const [formData, setFormData] = useState({
-    registerYourself: {
-      fullName: "",
-      businessEmail: "",
-      phoneNumber: "",
-      companyName: "",
-      companyWebsite: "",
-      businessAddress: "",
-      businessType: "",
-      referralSource: "",
-    } as RegisterYourselfData,
-    services: [],
-    industries: [],
-    technologies: [] as { category: string }[],
-    features: [],
-    specialOffers: {
-      discounts: [],
-      appliedDiscount: 10,
-    },
-    timeline: "fast-track",
-    budget: {
-      paymentMethod: "milestone",
-    },
-    estimate: {
-      accepted: false,
-    },
-    agreement: {
-      accepted: false,
-    },
-    proceedOptions: {
-      selectedOption: null,
-      completed: false,
-    },
+  // Initialize form data from localStorage or use default values
+  const [formData, setFormData] = useState<FormData>(() => {
+    // Only run in browser environment
+    if (typeof window !== "undefined") {
+      try {
+        const savedData = localStorage.getItem(STORAGE_KEYS.FORM_DATA)
+        if (savedData) {
+          return JSON.parse(savedData)
+        }
+      } catch (error) {
+        console.error("Error loading saved form data:", error)
+      }
+    }
+
+    // Default form data if nothing in localStorage
+    return {
+      registerYourself: {
+        fullName: "",
+        businessEmail: "",
+        phoneNumber: "",
+        companyName: "",
+        companyWebsite: "",
+        businessAddress: "",
+        businessType: "",
+        referralSource: "",
+      } as RegisterYourselfData,
+      services: [],
+      industries: [],
+      technologies: [],
+      features: [],
+      specialOffers: {
+        discounts: [],
+        appliedDiscount: 10,
+      },
+      timeline: "fast-track",
+      budget: {
+        paymentMethod: "milestone",
+      },
+      estimate: {
+        accepted: false,
+      },
+      agreement: {
+        accepted: false,
+      },
+      proceedOptions: {
+        selectedOption: null,
+        completed: false,
+      },
+    }
   })
 
   // Define all steps in the onboarding process with validation
@@ -148,20 +195,57 @@ export default function GetStartedPage() {
     {
       number: 10,
       name: "Proceed Options",
-      component: <ProceedOptions />,
+      component: <ProceedOptions projectData={undefined} onUpdate={function (data: { selectedOption: string | null; completed: boolean }): void {
+        throw new Error("Function not implemented.")
+      } } />,
       isValid: false, // Requires selection and completion
       requiredFields: [],
     },
   ])
 
-  // State for current step
-  const [currentStepIndex, setCurrentStepIndex] = useState(0)
+  // Initialize current step from localStorage or default to 0
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const savedStep = localStorage.getItem(STORAGE_KEYS.CURRENT_STEP)
+        if (savedStep !== null) {
+          return Number.parseInt(savedStep, 10)
+        }
+      } catch (error) {
+        console.error("Error loading saved step:", error)
+      }
+    }
+    return 0
+  })
+
   const [showPreviousStepsDropdown, setShowPreviousStepsDropdown] = useState(false)
 
   // State for sidebar visibility in mobile/tablet view
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Update step validation based on form data - Fixed TypeScript error
+  // Save form data to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(STORAGE_KEYS.FORM_DATA, JSON.stringify(formData))
+      } catch (error) {
+        console.error("Error saving form data:", error)
+      }
+    }
+  }, [formData])
+
+  // Save current step to localStorage whenever it changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.setItem(STORAGE_KEYS.CURRENT_STEP, currentStepIndex.toString())
+      } catch (error) {
+        console.error("Error saving current step:", error)
+      }
+    }
+  }, [currentStepIndex])
+
+  // Update step validation based on form data
   useEffect(() => {
     setSteps((prevSteps) => {
       return prevSteps.map((step, index) => {
@@ -212,7 +296,7 @@ export default function GetStartedPage() {
     setSidebarOpen(false)
   }, [currentStepIndex])
 
-  // Navigate to next step - Improved for reliability
+  // Navigate to next step
   const goToNextStep = () => {
     if (currentStepIndex < steps.length - 1) {
       if (steps[currentStepIndex].isValid) {
@@ -242,7 +326,7 @@ export default function GetStartedPage() {
     }
   }
 
-  // Update form data - Improved for reliability
+  // Update form data
   const updateFormData = (section: string, data: any) => {
     setFormData((prev) => {
       const updated = {
@@ -251,6 +335,19 @@ export default function GetStartedPage() {
       }
       return updated
     })
+  }
+
+  // Clear saved progress
+  const clearProgress = () => {
+    if (typeof window !== "undefined") {
+      try {
+        localStorage.removeItem(STORAGE_KEYS.FORM_DATA)
+        localStorage.removeItem(STORAGE_KEYS.CURRENT_STEP)
+        window.location.reload()
+      } catch (error) {
+        console.error("Error clearing progress:", error)
+      }
+    }
   }
 
   // Calculate progress percentage
@@ -427,6 +524,19 @@ export default function GetStartedPage() {
           <p className="text-sm">{getSelectionCount()}</p>
         </div>
       )}
+
+      {/* Reset progress button */}
+      <button
+        type="button"
+        onClick={() => {
+          if (window.confirm("Are you sure you want to clear all progress and start over?")) {
+            clearProgress()
+          }
+        }}
+        className="mt-auto text-xs text-white/70 hover:text-white py-2 px-3 rounded-md hover:bg-white/10 transition-colors"
+      >
+        Reset Progress
+      </button>
     </>
   )
 
@@ -555,6 +665,15 @@ export default function GetStartedPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Progress saved notification */}
+      <div
+        className="fixed bottom-4 right-4 bg-green-100 border border-green-200 text-green-800 px-4 py-2 rounded-md shadow-md text-sm flex items-center gap-2 opacity-0 transition-opacity duration-300"
+        id="save-notification"
+      >
+        <Check className="w-4 h-4" />
+        Progress saved
       </div>
     </div>
   )
