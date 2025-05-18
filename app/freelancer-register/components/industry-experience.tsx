@@ -19,7 +19,11 @@ export default function IndustryExperience({ data, onUpdate }: IndustryExperienc
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Toggle industry selection

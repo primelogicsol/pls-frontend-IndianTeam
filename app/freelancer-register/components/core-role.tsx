@@ -23,7 +23,11 @@ export default function CoreRole({ data, onUpdate }: CoreRoleProps) {
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Handle domain selection

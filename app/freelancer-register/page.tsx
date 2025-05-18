@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useMemo } from "react"
+import { useState, useEffect, useMemo, useCallback } from "react"
 import { FreelancerRegisterLayout } from "./components/layout"
 import WhoYouAre from "./components/who-you-are"
 import CoreRole from "./components/core-role"
@@ -264,18 +264,32 @@ export default function FreelancerRegisterPage() {
     return 0
   })
 
-  // Save form data to localStorage whenever it changes
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        localStorage.setItem(STORAGE_KEYS.FORM_DATA, JSON.stringify(formData))
-      } catch (error) {
-        console.error("Error saving form data:", error)
+  // Update form data
+  const updateFormData = useCallback((section: keyof FreelancerData, data: any) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        [section]: data,
       }
-    }
+    })
+  }, [])
+
+  // Save form data to localStorage with throttling
+  useEffect(() => {
+    const saveTimeout = setTimeout(() => {
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(STORAGE_KEYS.FORM_DATA, JSON.stringify(formData))
+        } catch (error) {
+          console.error("Error saving form data:", error)
+        }
+      }
+    }, 500) // 500ms throttle
+
+    return () => clearTimeout(saveTimeout)
   }, [formData])
 
-  // Save current step to localStorage whenever it changes
+  // Save current step to localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       try {
@@ -368,16 +382,6 @@ export default function FreelancerRegisterPage() {
       setCurrentStepIndex(index)
       window.scrollTo(0, 0)
     }
-  }
-
-  // Update form data
-  const updateFormData = (section: keyof FreelancerData, data: any) => {
-    setFormData((prev) => {
-      return {
-        ...prev,
-        [section]: data,
-      }
-    })
   }
 
   // Clear saved progress
