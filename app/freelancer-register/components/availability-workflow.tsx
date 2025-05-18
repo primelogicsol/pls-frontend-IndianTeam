@@ -30,7 +30,11 @@ export default function AvailabilityWorkflow({ data, onUpdate }: AvailabilityWor
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Handle slider change for weekly commitment

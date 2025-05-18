@@ -30,7 +30,11 @@ export default function DomainExperience({ data, primaryDomain, onUpdate }: Doma
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Add a new role

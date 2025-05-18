@@ -20,7 +20,11 @@ export default function EliteSkillCards({ data, primaryDomain, onUpdate }: Elite
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Toggle skill selection

@@ -46,7 +46,11 @@ export default function WhoYouAre({ data, onUpdate }: WhoYouAreProps) {
 
   // Update parent component when form data changes
   useEffect(() => {
-    onUpdate(formData)
+    const updateTimeout = setTimeout(() => {
+      onUpdate(formData)
+    }, 100)
+
+    return () => clearTimeout(updateTimeout)
   }, [formData, onUpdate])
 
   // Handle input changes
