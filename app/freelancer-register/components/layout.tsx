@@ -45,14 +45,14 @@ export function FreelancerRegisterLayout({
 
   // Render the sidebar content
   const renderSidebarContent = () => (
-    <>
+    <div className="flex flex-col w-full h-full">
       <Image src="/favicon.ico" alt="Logo" width={60} height={60} className="mb-8 filter brightness-0 invert" />
-      <h2 className="text-3xl font-bold mb-4">FREELANCER REGISTER</h2>
-      <p className="text-sm">Complete your profile in a few simple steps</p>
+      <h2 className="text-3xl font-bold mb-4 w-full">FREELANCER REGISTER</h2>
+      <p className="text-sm w-full">Complete your profile in a few simple steps</p>
 
       {/* Progress indicator */}
-      <div className="mt-8">
-        <div className="flex justify-between mb-2">
+      <div className="mt-8 w-full">
+        <div className="flex justify-between mb-2 w-full">
           <span className="text-xs">Progress</span>
           <span className="text-xs">{progressPercentage}%</span>
         </div>
@@ -65,11 +65,11 @@ export function FreelancerRegisterLayout({
       </div>
 
       {/* Step indicators */}
-      <div className="mt-8 space-y-2 overflow-y-auto max-h-[calc(100vh-350px)]">
+      <div className="mt-8 space-y-2 overflow-y-auto max-h-[calc(100vh-350px)] w-full">
         {steps.map((step, index) => (
           <div
             key={index}
-            className={`flex items-center gap-2 py-1 px-2 rounded ${
+            className={`flex items-center gap-2 py-1 px-2 rounded w-full ${
               index === currentStepIndex ? "bg-white/10" : ""
             } ${index < currentStepIndex ? "cursor-pointer" : ""}`}
             onClick={() => index < currentStepIndex && goToStep(index)}
@@ -92,7 +92,7 @@ export function FreelancerRegisterLayout({
 
       {/* Selected count */}
       {currentStepIndex > 0 && (
-        <div className="mt-8 p-4 bg-white/10 rounded-lg">
+        <div className="mt-8 p-4 bg-white/10 rounded-lg w-full">
           <h3 className="font-medium mb-2">Your Selections</h3>
           <p className="text-sm">{selectionCount}</p>
         </div>
@@ -106,15 +106,18 @@ export function FreelancerRegisterLayout({
             clearProgress()
           }
         }}
-        className="mt-auto text-xs text-white/70 hover:text-white py-2 px-3 rounded-md hover:bg-white/10 transition-colors"
+        className="mt-auto text-xs text-white/70 hover:text-white py-2 px-3 rounded-md hover:bg-white/10 transition-colors w-full text-left"
       >
         Reset Progress
       </button>
-    </>
+    </div>
   )
 
   return (
-    <div className="w-full px-4 sm:px-6 md:px-8 py-6">
+    // Let's adjust the main container to ensure proper spacing and full width usage
+
+    // Update the main container to have proper padding and width
+    <div className="w-full px-0 sm:px-0 md:px-0 py-6">
       <div className="w-full shadow-lg border border-gray-200 rounded-lg overflow-hidden max-w-[1920px] mx-auto">
         <div className="flex flex-col lg:flex-row relative">
           {/* Mobile/Tablet Hamburger Menu */}
@@ -151,8 +154,8 @@ export function FreelancerRegisterLayout({
           {/* Blue sidebar - Desktop always visible, Mobile/Tablet in drawer */}
           <div
             className={`bg-[#003087] text-white lg:w-1/5 p-4 sm:p-6 lg:p-8 pt-8 lg:pt-12 flex flex-col
-                        lg:relative lg:block
-                        ${sidebarOpen ? "fixed inset-0 z-50 overflow-y-auto" : "hidden"}`}
+                  lg:relative lg:block
+                  ${sidebarOpen ? "fixed inset-0 z-50 overflow-y-auto" : "hidden"}`}
           >
             {/* Close button for mobile sidebar */}
             <button
