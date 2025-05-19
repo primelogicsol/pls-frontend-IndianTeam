@@ -299,7 +299,7 @@ export default function Estimate({
             </div>
 
             {/* Pricing Rule Summary */}
-            <div className="mb-8 p-5 border rounded-lg bg-blue-50">
+            {/* <div className="mb-8 p-5 border rounded-lg bg-blue-50">
               <h4 className="font-semibold text-blue-800 mb-3 flex items-center">
                 <span className="mr-2">💼</span> Pricing Rule Summary
               </h4>
@@ -317,7 +317,7 @@ export default function Estimate({
                   </span>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             {/* Cost Breakdown */}
             <Collapsible open={showBreakdown} onOpenChange={setShowBreakdown} className="border rounded-md mb-6">
