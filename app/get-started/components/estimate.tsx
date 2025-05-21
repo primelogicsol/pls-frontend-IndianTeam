@@ -571,13 +571,12 @@ export default function Estimate({
                           {formatCurrency(usStandardPrice.min)} – {formatCurrency(usStandardPrice.max)}
                         </span>
                       </div>
-                      <Progress value={80} className="h-2 bg-gray-200" />
+                      <Progress value={80} className="h-2 bg-gray-200 text-[#FF6B35]" />
                       <p className="text-xs text-gray-500 mt-1">
                         <span
                           className={isPricingRuleUSMet ? "text-green-600 font-medium" : "text-red-600 font-medium"}
                         >
-                          {isPricingRuleUSMet ? "✓ " : "✗ "}
-                          Our price is {isPricingRuleUSMet ? "less than" : "not less than"} 50% of US rates
+                          
                         </span>
                       </p>
                     </div>
@@ -607,8 +606,7 @@ export default function Estimate({
                         <span
                           className={isPricingRuleIndiaMet ? "text-green-600 font-medium" : "text-red-600 font-medium"}
                         >
-                          {isPricingRuleIndiaMet ? "✓ " : "✗ "}
-                          Our price is {isPricingRuleIndiaMet ? "at least" : "not"} 10% higher than Indian rates
+                          
                         </span>
                       </p>
                     </div>
@@ -684,7 +682,7 @@ export default function Estimate({
             <Button
               onClick={acceptEstimate}
               className={`px-8 py-2 ${
-                estimateData.accepted ? "bg-green-600 hover:bg-green-700" : "bg-[#FF6B35] hover:bg-[#e55a29]"
+                estimateData.accepted ? "bg-[#003087] hover:bg-[#003087]" : "bg-[#FF6B35] hover:bg-[#e55a29]"
               }`}
             >
               {estimateData.accepted ? (
