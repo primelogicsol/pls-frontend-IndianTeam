@@ -46,7 +46,7 @@ export function FreelancerRegisterLayout({
   // Render the sidebar content
   const renderSidebarContent = () => (
     <div className="flex flex-col w-full h-full">
-      <Image src="/favicon.ico" alt="Logo" width={60} height={60} className="mb-8 filter brightness-0 invert" />
+      <Image src="/assets/logo6.png" alt="Logo" width={150} height={120} className="mb-8 filter brightness-0 invert" />
       <h2 className="text-3xl font-bold mb-4 w-full">FREELANCER REGISTER</h2>
       <p className="text-sm w-full">Complete your profile in a few simple steps</p>
 
@@ -180,9 +180,9 @@ export function FreelancerRegisterLayout({
                 <button
                   type="button"
                   onClick={goToPreviousStep}
-                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 rounded-md bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 rounded-md bg-[#FF6B35] border border-gray-300 text-white hover:bg-[#e55a29] transition-colors"
                 >
-                  <ArrowLeft className="w-4 h-4 text-gray-500" /> Previous
+                  <ArrowLeft className="w-4 h-4 text-white" /> Previous
                 </button>
               ) : (
                 <div></div> // Empty div to maintain layout when there's no "Previous" button

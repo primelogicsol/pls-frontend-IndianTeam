@@ -45,25 +45,27 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
   // Handle proceed button click
   const handleProceed = () => {
     if (selectedOption === "secure") {
-      setShowPaymentModal(true)
+      alert("Payment backend not implemented yet. Contact your backend developer.");
+      // setShowPaymentModal(true)
     } else if (selectedOption === "quote") {
       // Simulate PDF download
-      setTimeout(() => {
-        const link = document.createElement("a")
-        link.href = "/project-quote.pdf" // This would be a real PDF in production
-        link.download = "Project_Quote.pdf"
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
+      // setTimeout(() => {
+      //   const link = document.createElement("a")
+      //   link.href = "/project-quote.pdf" // This would be a real PDF in production
+      //   link.download = "Project_Quote.pdf"
+      //   document.body.appendChild(link)
+      //   link.click()
+      //   document.body.removeChild(link)
 
-        if (onUpdate) {
-          onUpdate({
-            selectedOption,
-            completed: true,
-            action: "downloaded_quote",
-          })
-        }
-      }, 500)
+      //   if (onUpdate) {
+      //     onUpdate({
+      //       selectedOption,
+      //       completed: true,
+      //       action: "downloaded_quote",
+      //     })
+      //   }
+      // }, 500)
+      alert("PDF backend not implemented yet. Contact your backend developer.");
     } else if (selectedOption === "consultation") {
       // We'll use the Link component instead of this window.open
       if (onUpdate) {
