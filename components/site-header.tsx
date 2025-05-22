@@ -51,25 +51,25 @@ export function SiteHeader() {
     // For the default logo (non-scrolled state) - plogic.png
     setLogoSrc(`/assets/plogic.png`)
 
-    // For the scrolled logo - logo1.png
-    setScrolledLogoSrc(`${basePath}logo1.png`)
+    // For the scrolled logo - afterlogo.jpg
+    setScrolledLogoSrc(`/assets/logo1.png`)
 
     // Set up submenu images with exact menu title mapping
     const menuImages: Record<string, string> = {}
 
     // Exact mappings for main menu items
-    menuImages["Services"] = `${basePath}servicelogo.png`
-    menuImages["Industries"] = `${basePath}industrymenu.png`
-    menuImages["Industry"] = `${basePath}industrymenu.png` // Alternative spelling
-    menuImages["Technologies"] = `${basePath}techmenu.png`
-    menuImages["Technology"] = `${basePath}techmenu.png` // Alternative spelling
+    menuImages["Services"] = `assets/servicelogo.jpg`
+    menuImages["Industries"] = `assets/industrymenu.jpg`
+    menuImages["Industry"] = `assets/industrymenu.jpg` // Alternative spelling
+    menuImages["Technologies"] = `assets/techmenu.jpg`
+    menuImages["Technology"] = `assets/techmenu.jpg` // Alternative spelling
 
     // Also add mappings for potential variations in capitalization
-    menuImages["services"] = `${basePath}servicelogo.png`
-    menuImages["industries"] = `${basePath}industrymenu.png`
-    menuImages["industry"] = `${basePath}industrymenu.png`
-    menuImages["technologies"] = `${basePath}techmenu.png`
-    menuImages["technology"] = `${basePath}techmenu.png`
+    menuImages["services"] = `assets/servicelogo.jpg`
+    menuImages["industries"] = `assets/industrymenu.jpg`
+    menuImages["industry"] = `assets/industrymenu.jpg`
+    menuImages["technologies"] = `assets/techmenu.jpg`
+    menuImages["technology"] = `assets/techmenu.jpg`
 
     setSubmenuImages(menuImages)
 
@@ -261,11 +261,11 @@ export function SiteHeader() {
 
     // If no exact match, try to match by keyword
     if (lowerTitle.includes("service")) {
-      return submenuImages["Services"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}servicelogo.png`
+      return submenuImages["Services"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}servicelogo.jpg`
     } else if (lowerTitle.includes("industr")) {
-      return submenuImages["Industries"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}industrymenu.png`
+      return submenuImages["Industries"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}industrymenu.jpg`
     } else if (lowerTitle.includes("tech")) {
-      return submenuImages["Technologies"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}techmenu.png`
+      return submenuImages["Technologies"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}techmenu.jpg`
     }
 
     // Final fallback
@@ -297,7 +297,7 @@ export function SiteHeader() {
               "border px-4 py-2 rounded transition-colors",
               scrolled
                 ? "border-white text-white hover:bg-white hover:text-[#003087]"
-                : "border-primary text-primary hover:bg-primary hover:text-white",
+                : "border-primary text-primary hover:bg-[#FF6B35] hover:text-white",
             )}
           >
             {item.title}
@@ -420,7 +420,7 @@ export function SiteHeader() {
                     "border px-4 py-2 rounded transition-colors",
                     scrolled
                       ? "border-white text-white hover:bg-white hover:text-[#003087]"
-                      : "border-primary text-primary hover:bg-primary hover:text-white",
+                      : "border-primary text-primary hover:bg-[#FF6B35] hover:text-white",
                   )}
                 >
                   {button.title}
