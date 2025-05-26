@@ -167,6 +167,23 @@ export function SiteHeader() {
     }
   }, [mobileMenuOpen])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null)
+        setCategoryPage(0)
+      }
+    }
+
+    if (activeDropdown) {
+      document.addEventListener("mousedown", handleClickOutside)
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+      }
+    }
+  }, [activeDropdown])
+
   const toggleDropdown = (dropdown: string) => {
     if (activeDropdown === dropdown) {
       setActiveDropdown(null)
@@ -270,6 +287,12 @@ export function SiteHeader() {
 
     // Final fallback
     return "/placeholder.svg"
+  }
+
+  // Function to close dropdown when clicking on links
+  const handleDropdownLinkClick = () => {
+    setActiveDropdown(null)
+    setCategoryPage(0)
   }
 
   // Function to render navigation items based on type
@@ -477,7 +500,7 @@ export function SiteHeader() {
                 key={`dropdown-${item.id}`}
                 className="absolute z-50 left-1/2 transform -translate-x-1/2 bg-white shadow-lg border-t border-gray-200 w-3/4 max-w-5xl"
               >
-                <div className="px-4 py-8 relative">
+                <div className="px-4 pb-16 relative">
                   <div className="grid grid-cols-4 gap-8">
                     {/* Sidebar with taller image */}
                     <div className="bg-[#003087] text-white rounded-lg overflow-hidden">
@@ -509,14 +532,22 @@ export function SiteHeader() {
                               <ul className="space-y-2">
                                 {limitedItems.map((subItem) => (
                                   <li key={subItem.id}>
-                                    <Link href={subItem.url || "#"} className="text-gray-700 hover:text-[#FF6B35]">
+                                    <Link
+                                      href={subItem.url || "#"}
+                                      className="text-gray-700 hover:text-[#FF6B35]"
+                                      onClick={handleDropdownLinkClick}
+                                    >
                                       {subItem.title}
                                     </Link>
                                   </li>
                                 ))}
                                 {categoryItems.length > ITEMS_PER_PAGE && (
                                   <li>
-                                    <Link href="#" className="text-[#FF6B35] hover:underline text-sm">
+                                    <Link
+                                      href="#"
+                                      className="text-[#FF6B35] hover:underline text-sm"
+                                      onClick={handleDropdownLinkClick}
+                                    >
                                       View all {categoryItems.length} items...
                                     </Link>
                                   </li>
@@ -529,16 +560,18 @@ export function SiteHeader() {
                     ))}
                   </div>
 
-                  {/* Navigation buttons at bottom corners */}
-                  {categoryPage > 0 && (
-                    <button
-                      onClick={(e) => handlePrevCategoryPage(e)}
-                      className="absolute bottom-4 left-4 bg-[#FF6B35] text-white p-2 rounded-full hover:bg-[#FF6B35]/80 transition-colors"
-                      aria-label="Previous page"
-                    >
-                      <ChevronLeft className="h-5 w-5" />
-                    </button>
-                  )}
+                  {/* Navigation buttons - Previous below left card, Next at bottom right */}
+                  <div className="absolute left-4 top-72">
+                    {categoryPage > 0 && (
+                      <button
+                        onClick={(e) => handlePrevCategoryPage(e)}
+                        className="bg-[#FF6B35] text-white p-2 rounded-full hover:bg-[#FF6B35]/80 transition-colors"
+                        aria-label="Previous page"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                    )}
+                  </div>
 
                   {categoryPage < totalPages - 1 && (
                     <button
@@ -572,7 +605,7 @@ export function SiteHeader() {
                 key={`dropdown-${item.id}`}
                 className="absolute z-50 left-1/2 transform -translate-x-1/2 bg-white shadow-lg border-t border-gray-200 w-3/4 max-w-5xl"
               >
-                <div className="px-4 py-6 relative">
+                <div className="px-4 pb-16 relative">
                   <div className="flex">
                     {/* Left sidebar with gradient background and taller image */}
                     <div className="w-1/4 bg-gradient-to-b from-[#003087]/80 to-[#003087] rounded-l-lg p-6 flex flex-col justify-center">
@@ -605,6 +638,7 @@ export function SiteHeader() {
                                     <Link
                                       href={subItem.url || "#"}
                                       className="text-gray-600 hover:text-[#FF6B35] text-sm"
+                                      onClick={handleDropdownLinkClick}
                                     >
                                       {subItem.title}
                                     </Link>
@@ -612,7 +646,11 @@ export function SiteHeader() {
                                 ))}
                                 {child.subItems.length > ITEMS_PER_PAGE && (
                                   <li>
-                                    <Link href={child.url || "#"} className="text-[#FF6B35] hover:underline text-sm">
+                                    <Link
+                                      href={child.url || "#"}
+                                      className="text-[#FF6B35] hover:underline text-sm"
+                                      onClick={handleDropdownLinkClick}
+                                    >
                                       View all {child.subItems.length} items...
                                     </Link>
                                   </li>
@@ -625,16 +663,18 @@ export function SiteHeader() {
                     </div>
                   </div>
 
-                  {/* Navigation buttons at bottom corners */}
-                  {categoryPage > 0 && (
-                    <button
-                      onClick={(e) => handlePrevCategoryPage(e)}
-                      className="absolute bottom-4 left-4 bg-[#FF6B35] text-white p-2 rounded-full hover:bg-[#FF6B35]/80 transition-colors"
-                      aria-label="Previous page"
-                    >
-                      <ChevronLeft className="h-5 w-5" />
-                    </button>
-                  )}
+                  {/* Navigation buttons - Previous below left card, Next at bottom right */}
+                  <div className="absolute left-4 bottom-4">
+                    {categoryPage > 0 && (
+                      <button
+                        onClick={(e) => handlePrevCategoryPage(e)}
+                        className="bg-[#FF6B35] text-white p-2 rounded-full hover:bg-[#FF6B35]/80 transition-colors"
+                        aria-label="Previous page"
+                      >
+                        <ChevronLeft className="h-5 w-5" />
+                      </button>
+                    )}
+                  </div>
 
                   {categoryPage < totalPages - 1 && (
                     <button
