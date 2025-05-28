@@ -57,7 +57,9 @@ const ServiceCard = ({ service }: { service: Service }) => {
 
         <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
           <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center mb-4">
-            <Image src={service.icon || "/placeholder.svg"} alt="" width={40} height={40} />
+            <Image 
+            src={service.icon || "/placeholder.svg"} 
+            alt="" width={40} height={40} />
           </div>
 
           <h3 className="text-2xl font-bold mb-2 text-white">{service.title}</h3>
@@ -100,8 +102,8 @@ export function AllServices({ services = [] }: AllServicesProps) {
       <div className="container mx-auto justify-center px-4">
         <div className="text-center mb-12">
           <div className="">
-            <span className="text-[#FF6B35] font-semibold mb-2 inline-block">Innovate. Scale. Secure. Succeed.</span>
-            <h2 className="text-2xl md:text-3xl font-bold">
+            <span className="text-[#FF6B35] font-bold contrast-100 mb-2 inline-flex">Innovate. Scale. Secure. Succeed.</span>
+            <h2 className="contrast-100text-2xl md:text-3xl font-bold">
               Empowering Enterprises with Future-Ready IT & Digital Strategies for Scalable Growth, Resilient Security,
               and Market <span className="text-[#FF6B35]">Leadership</span>
             </h2>
@@ -114,15 +116,7 @@ export function AllServices({ services = [] }: AllServicesProps) {
           ))}
         </div>
 
-        <div className="mt-8 text-center md:hidden">
-          <Link
-            href="/services"
-            className="inline-flex items-center gap-2 bg-[#003087] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#FF6B35] hover:text-white transition-colors"
-          >
-            VIEW ALL SERVICES
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
+        
       </div>
     </section>
   )

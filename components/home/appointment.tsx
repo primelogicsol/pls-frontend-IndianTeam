@@ -166,13 +166,13 @@ export default function Appointment() {
               />
               <ContactCard
                 icon={<MapPin className="w-6 h-6 text-white" />}
-                title="VISIT OFFICE TO OFFICE HOURS"
-                detail="11166 Fairfax Blvd Ste 500, Fairfax, VA 22030"
+                title="OFFICE HOURS"
+                detail="Monday–Friday: 9:00 AM – 6:00 PM (EST) Saturday: By Appointment Only"
               />
               <ContactCard
                 icon={<MapPin className="w-6 h-6 text-white" />}
-                title="VISIT GERMAN OFFICE"
-                detail="Kaiserbleek 4 Goslar"
+                title="CORPORATE HEADQUARTERS"
+                detail="11166 Fairfax Blvd Ste 500, Fairfax, VA 22030"
               />
             </div>
           </motion.div>
