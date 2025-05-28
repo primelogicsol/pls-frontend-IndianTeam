@@ -58,18 +58,18 @@ export function SiteHeader() {
     const menuImages: Record<string, string> = {}
 
     // Exact mappings for main menu items
-    menuImages["Services"] = `assets/servicelogo.jpg`
-    menuImages["Industries"] = `assets/industrymenu.jpg`
-    menuImages["Industry"] = `assets/industrymenu.jpg` // Alternative spelling
-    menuImages["Technologies"] = `assets/techmenu.jpg`
-    menuImages["Technology"] = `assets/techmenu.jpg` // Alternative spelling
+    menuImages["Services"] = `/assets/servicelogo.jpg`
+    menuImages["Industries"] = `/assets/industrymenu.jpg`
+    menuImages["Industry"] = `/assets/industrymenu.jpg` // Alternative spelling
+    menuImages["Technologies"] = `/assets/techmenu.jpg`
+    menuImages["Technology"] = `/assets/techmenu.jpg` // Alternative spelling
 
     // Also add mappings for potential variations in capitalization
-    menuImages["services"] = `assets/servicelogo.jpg`
-    menuImages["industries"] = `assets/industrymenu.jpg`
-    menuImages["industry"] = `assets/industrymenu.jpg`
-    menuImages["technologies"] = `assets/techmenu.jpg`
-    menuImages["technology"] = `assets/techmenu.jpg`
+    menuImages["services"] = `/assets/servicelogo.jpg`
+    menuImages["industries"] = `/assets/industrymenu.jpg`
+    menuImages["industry"] = `/assets/industrymenu.jpg`
+    menuImages["technologies"] = `/assets/techmenu.jpg`
+    menuImages["technology"] = `/assets/techmenu.jpg`
 
     setSubmenuImages(menuImages)
 
@@ -278,11 +278,11 @@ export function SiteHeader() {
 
     // If no exact match, try to match by keyword
     if (lowerTitle.includes("service")) {
-      return submenuImages["Services"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}servicelogo.jpg`
+      return submenuImages["Services"] || `/assets/servicelogo.jpg`
     } else if (lowerTitle.includes("industr")) {
-      return submenuImages["Industries"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}industrymenu.jpg`
+      return submenuImages["Industries"] || `/assets/industrymenu.jpg`
     } else if (lowerTitle.includes("tech")) {
-      return submenuImages["Technologies"] || `${imagePath}${imagePath.endsWith("/") ? "" : "/"}techmenu.jpg`
+      return submenuImages["Technologies"] || `/assets/techmenu.jpg`
     }
 
     // Final fallback
@@ -506,6 +506,7 @@ export function SiteHeader() {
                     <div className="bg-[#003087] text-white rounded-lg overflow-hidden">
                       <div className="relative h-64 w-full">
                         <Image
+                          key={featuredImage}
                           src={featuredImage || "/placeholder.svg"}
                           alt={item.title}
                           width={260}
