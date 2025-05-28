@@ -18,7 +18,7 @@ export default function FooterCard() {
           {/* Right Section - Button */}
           <motion.a
             href="/freelancer-register"
-            className="px-8 py-3 text-white rounded-lg font-semibold bg-[#FF6B35] hover:text-white transition"
+            className="px-8 py-3 text-white rounded-lg font-bold contrast-100 bg-[#FF6B35] hover:text-white transition"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}
           >

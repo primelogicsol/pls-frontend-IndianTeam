@@ -102,8 +102,8 @@ export function AllServices({ services = [] }: AllServicesProps) {
       <div className="container mx-auto justify-center px-4">
         <div className="text-center mb-12">
           <div className="">
-            <span className="text-[#FF6B35] font-semibold mb-2 inline-block">Innovate. Scale. Secure. Succeed.</span>
-            <h2 className="text-2xl md:text-3xl font-bold">
+            <span className="text-[#FF6B35] font-bold contrast-100 mb-2 inline-flex">Innovate. Scale. Secure. Succeed.</span>
+            <h2 className="contrast-100text-2xl md:text-3xl font-bold">
               Empowering Enterprises with Future-Ready IT & Digital Strategies for Scalable Growth, Resilient Security,
               and Market <span className="text-[#FF6B35]">Leadership</span>
             </h2>

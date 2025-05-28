@@ -257,7 +257,7 @@ export const Footer = () => {
                 placeholder="Email Address"
                 className="w-full md:w-3/4 px-4 py-2 bg-white text-black rounded-md focus:outline-none"
               />
-              <button className="w-full md:w-1/4 bg-orange-500 px-4 py-2 text-white hover:text-white font-semibold rounded-md">
+              <button className="w-full md:w-1/4 bg-[#FF6B35] space-x-1 px-4 py-2 contrast-100 text-white hover:text-white font-semibold rounded-md">
                 <Link href="/get-started">Subscribe</Link>
               </button>
             </div>
