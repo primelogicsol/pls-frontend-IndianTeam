@@ -159,7 +159,6 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
                 quality={85}
                 sizes="100vw"
                 className="object-cover"
-                onError={() => handleImageError(safeIndex)}
               />
             )}
           </motion.div>
@@ -185,7 +184,6 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
               quality={85}
               sizes="100vw"
               className="object-cover"
-              onError={() => handleImageError(safePrevIndex)}
             />
           )}
         </motion.div>
@@ -253,7 +251,7 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
                 className="text-base sm:text-lg md:text-xl bg-[#FF6B35] text-white rounded-lg shadow-lg transition-colors duration-300 px-4 py-2 sm:px-6 sm:py-3 md:px-8 md:py-4 w-44 h-12 sm:w-56 sm:h-16 mx-auto sm:mx-0 overflow-hidden relative"
               >
                 <motion.span className="absolute inset-0 bg-gradient-to-r from-[#FF6B35] to-[#FF8B35] opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                <motion.span className="relative z-10">Discover More</motion.span>
+                <motion.span className="relative z-10 contrast-100">Discover More</motion.span>
               </motion.button>
             </Link>
           </motion.div>
