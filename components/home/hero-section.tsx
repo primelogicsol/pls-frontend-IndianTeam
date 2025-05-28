@@ -159,7 +159,6 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
                 quality={85}
                 sizes="100vw"
                 className="object-cover"
-                onError={() => handleImageError(safeIndex)}
               />
             )}
           </motion.div>
@@ -185,7 +184,6 @@ export const HeroSection = ({ slides = [] }: HeroSectionProps) => {
               quality={85}
               sizes="100vw"
               className="object-cover"
-              onError={() => handleImageError(safePrevIndex)}
             />
           )}
         </motion.div>
