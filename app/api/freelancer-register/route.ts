@@ -21,6 +21,7 @@ export async function POST(request: Request) {
   try {
     // Parse the request body
     const body = await request.json()
+    console.log("body", body)
 
     // Validate the request data
     const validatedData = freelancerSchema.parse(body)

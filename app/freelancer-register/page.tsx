@@ -106,7 +106,7 @@ interface Step {
 }
 
 // Storage keys
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   FORM_DATA: "freelancer_register_form_data",
   CURRENT_STEP: "freelancer_register_current_step",
 }

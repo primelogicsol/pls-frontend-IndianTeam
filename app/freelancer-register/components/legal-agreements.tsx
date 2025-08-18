@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { FileText, Shield, Upload, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { STORAGE_KEYS } from "../page"
 
 interface Agreement {
   id: string
@@ -242,6 +243,37 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
 
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
+  }
+
+  const handleSubmit = () => {
+    const freelancerData = localStorage.getItem(STORAGE_KEYS.FORM_DATA)
+    if (freelancerData) {
+      const freelancerObj = JSON.parse(freelancerData);
+      console.log("freelancerObj", freelancerObj);
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/freelancer/getFreeLancerJoinUsRequestV2`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(freelancerObj),
+      })
+        .then(async (response) => {
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.message || "Failed to register freelancer");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // You can show a success message or redirect as needed
+          alert("Freelancer registration submitted successfully!");
+          // Optionally, clear form or trigger next step here
+          // console.log("data", data);
+        })
+        .catch((error) => {
+          alert(`Error: ${error.message}`);
+        });
+    }
   }
 
   return (
@@ -688,6 +720,7 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
                   onClick={() => {
                     if (validateForm()) {
                       alert("All documents submitted successfully!")
+                      handleSubmit()
                     }
                   }}
                 >
