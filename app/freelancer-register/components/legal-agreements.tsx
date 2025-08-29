@@ -719,7 +719,6 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
                   }
                   onClick={() => {
                     if (validateForm()) {
-                      alert("All documents submitted successfully!")
                       handleSubmit()
                     }
                   }}

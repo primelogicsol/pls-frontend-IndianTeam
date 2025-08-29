@@ -118,7 +118,6 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
       //     })
       //   }
       // }, 500)
-      alert("PDF backend not implemented yet");
     } else if (selectedOption === "consultation") {
       // We'll use the Link component instead of this window.open
       if (onUpdate) {
