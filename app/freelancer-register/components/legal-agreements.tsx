@@ -1,14 +1,14 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
-import { FileText, Shield, Upload, AlertCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Alert, AlertDescription } from "@/components/ui/alert"
+import { AlertCircle, FileText, Shield, Upload } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 import { STORAGE_KEYS } from "../page"
 
 interface Agreement {
@@ -44,6 +44,7 @@ interface LegalAgreementsProps {
 export default function LegalAgreements({ data, freelancerName, onUpdate }: LegalAgreementsProps) {
   const [formData, setFormData] = useState<LegalAgreementsData>(data)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [success, setSuccess] = useState(false)
 
   const idFileInputRef = useRef<HTMLInputElement>(null)
   const taxFileInputRef = useRef<HTMLInputElement>(null)
@@ -249,7 +250,6 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
     const freelancerData = localStorage.getItem(STORAGE_KEYS.FORM_DATA)
     if (freelancerData) {
       const freelancerObj = JSON.parse(freelancerData);
-      console.log("freelancerObj", freelancerObj);
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/freelancer/getFreeLancerJoinUsRequestV2`, {
         method: "POST",
         headers: {
@@ -265,10 +265,7 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
           return response.json();
         })
         .then((data) => {
-          // You can show a success message or redirect as needed
-          alert("Freelancer registration submitted successfully!");
-          // Optionally, clear form or trigger next step here
-          // console.log("data", data);
+          setSuccess(true);
         })
         .catch((error) => {
           alert(`Error: ${error.message}`);
@@ -278,6 +275,12 @@ export default function LegalAgreements({ data, freelancerName, onUpdate }: Lega
 
   return (
     <div className="p-6 md:p-8">
+      {success && (
+        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6" role="alert">
+          <span className="block font-bold">Success!</span>
+          <span>Your freelancer registration was submitted successfully.</span>
+        </div>
+      )}
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-bold mb-2">Legal Agreements</h1>
