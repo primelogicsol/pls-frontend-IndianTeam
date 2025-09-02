@@ -38,7 +38,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         <link rel="preconnect" href={process.env.NEXT_PUBLIC_IMAGE_PATH || "/assests"} />
         <link rel="dns-prefetch" href={process.env.NEXT_PUBLIC_IMAGE_PATH || "/assests"} />
       </head>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-screen bg-background font-sans antialiased" cz-shortcut-listen="true">
         <Providers>
           <PerformanceMonitor />
           <div className="relative flex min-h-screen flex-col">

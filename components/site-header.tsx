@@ -83,6 +83,7 @@ export function SiteHeader() {
         setIsLoading(true)
         // Use the admin header endpoint to get the navigation data
         const response = await fetch("/api/navigation")
+        console.log("site header response", response)
         if (!response.ok) {
           throw new Error("Failed to fetch navigation items")
         }

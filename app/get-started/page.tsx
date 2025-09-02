@@ -19,7 +19,7 @@ import ServiceAgreement from "./components/agreement"
 import ProceedOptions from "./components/payment"
 
 // Define proper interfaces for type safety
-interface RegisterYourselfData {
+export interface RegisterYourselfData {
   fullName: string
   businessEmail: string
   phoneNumber: string
@@ -31,7 +31,7 @@ interface RegisterYourselfData {
   [key: string]: string // Add index signature for dynamic access
 }
 
-interface FormData {
+export interface FormData {
   registerYourself: RegisterYourselfData
   services: any[]
   industries: any[]
@@ -66,7 +66,7 @@ interface Step {
 }
 
 // Storage keys
-const STORAGE_KEYS = {
+export const STORAGE_KEYS = {
   FORM_DATA: "project_builder_form_data",
   CURRENT_STEP: "project_builder_current_step",
 }

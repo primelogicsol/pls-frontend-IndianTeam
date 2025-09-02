@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { Calendar, Check, Download, FileText, Lock, CreditCard, ArrowRight } from "lucide-react"
@@ -17,6 +17,11 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
 import Appointment from "@/components/home/appointment"
+import { STORAGE_KEYS } from "../page"
+import { SummaryPage } from "./SummaryPage"
+import { Margin, usePDF } from 'react-to-pdf';
+
+
 
 interface ProceedOptionsProps {
   projectData?: any
@@ -30,9 +35,25 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
   const [processingPayment, setProcessingPayment] = useState(false)
   const [paymentComplete, setPaymentComplete] = useState(false)
 
+  const { toPDF, targetRef } = usePDF({
+    filename: 'project-summary.pdf',
+    page: { margin: Margin.MEDIUM, orientation: 'landscape', format: "a4" },
+    overrides: {
+      pdf: {
+        compress: true
+      },
+      canvas: {
+        scale: 2
+      }
+    }
+  });
+
+
+
   // Handle option selection
   const handleOptionSelect = (option: string) => {
     setSelectedOption(option)
+    console.log("option", option);
 
     if (onUpdate) {
       onUpdate({
@@ -42,12 +63,44 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
     }
   }
 
+
+
   // Handle proceed button click
   const handleProceed = () => {
     if (selectedOption === "secure") {
       alert("Payment backend not implemented yet. Contact your backend developer.");
       // setShowPaymentModal(true)
     } else if (selectedOption === "quote") {
+
+      toPDF()
+
+
+      const projectData = typeof window !== "undefined" ? localStorage.getItem(STORAGE_KEYS.FORM_DATA) : null
+      if (projectData) {
+        const projectObj = JSON.parse(projectData);
+        console.log("projectObj", projectObj);
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/projectRequest/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectObj),
+        })
+          .then(async (response) => {
+            if (!response.ok) {
+              const errorData = await response.json().catch(() => ({}));
+              throw new Error(errorData.message || "Failed to register freelancer");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("data", data);
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      }
+
       // Simulate PDF download
       // setTimeout(() => {
       //   const link = document.createElement("a")
@@ -65,7 +118,6 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
       //     })
       //   }
       // }, 500)
-      alert("PDF backend not implemented yet. Contact your backend developer.");
     } else if (selectedOption === "consultation") {
       // We'll use the Link component instead of this window.open
       if (onUpdate) {
@@ -118,17 +170,15 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
           <div className="flex flex-col h-full">
             <h3 className="text-lg font-semibold mb-3 text-[#003087]">I'm Ready to Start</h3>
             <Card
-              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${
-                selectedOption === "secure" ? "border-[#003087] bg-blue-50" : "border-gray-200"
-              }`}
+              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${selectedOption === "secure" ? "border-[#003087] bg-blue-50" : "border-gray-200"
+                }`}
               onClick={() => handleOptionSelect("secure")}
             >
               <CardHeader className="pb-4">
                 <div className="mb-2 flex justify-between items-start">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      selectedOption === "secure" ? "bg-[#003087] text-white" : "bg-gray-100"
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedOption === "secure" ? "bg-[#003087] text-white" : "bg-gray-100"
+                      }`}
                   >
                     <Lock className="h-5 w-5" />
                   </div>
@@ -166,17 +216,15 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
           <div className="flex flex-col h-full">
             <h3 className="text-lg font-semibold mb-3 text-[#003087]">I Want to Compare Options</h3>
             <Card
-              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${
-                selectedOption === "quote" ? "border-[#003087] bg-blue-50" : "border-gray-200"
-              }`}
+              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${selectedOption === "quote" ? "border-[#003087] bg-blue-50" : "border-gray-200"
+                }`}
               onClick={() => handleOptionSelect("quote")}
             >
               <CardHeader className="pb-4">
                 <div className="mb-2 flex justify-between items-start">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      selectedOption === "quote" ? "bg-[#003087] text-white" : "bg-gray-100"
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedOption === "quote" ? "bg-[#003087] text-white" : "bg-gray-100"
+                      }`}
                   >
                     <FileText className="h-5 w-5" />
                   </div>
@@ -205,17 +253,15 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
           <div className="flex flex-col h-full">
             <h3 className="text-lg font-semibold mb-3 text-[#003087]">I Need More Information</h3>
             <Card
-              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${
-                selectedOption === "consultation" ? "border-[#003087] bg-blue-50" : "border-gray-200"
-              }`}
+              className={`border-2 transition-all cursor-pointer hover:shadow-md h-full ${selectedOption === "consultation" ? "border-[#003087] bg-blue-50" : "border-gray-200"
+                }`}
               onClick={() => handleOptionSelect("consultation")}
             >
               <CardHeader className="pb-4">
                 <div className="mb-2 flex justify-between items-start">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                      selectedOption === "consultation" ? "bg-[#003087] text-white" : "bg-gray-100"
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedOption === "consultation" ? "bg-[#003087] text-white" : "bg-gray-100"
+                      }`}
                   >
                     <Calendar className="h-5 w-5" />
                   </div>
@@ -425,6 +471,21 @@ export default function ProceedOptions({ projectData, onUpdate }: ProceedOptions
           </DialogContent>
         </Dialog>
       </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "auto",
+          overflow: "hidden",
+          opacity: 0, // invisible to user
+          pointerEvents: "none", // user can’t interact
+        }}
+      >
+        <SummaryPage ref={targetRef} />
+      </div>
+
     </div>
   )
 }

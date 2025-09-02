@@ -26,7 +26,6 @@ export default function RegisterYourself({ formData = {}, onUpdate }: RegisterYo
   // Add useEffect to ensure parent component gets updated
   useEffect(() => {
     if (onUpdate) {
-      console.log("Updating parent with register data:", localFormData)
       onUpdate(localFormData)
     }
   }, [localFormData, onUpdate])
